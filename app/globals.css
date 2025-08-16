@@ -1,26 +1,102 @@
-@import "tailwindcss";
+/* app/globals.css */
 
+/* Tailwind base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== CSS Variables ===== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: 255 255 255;         /* white */
+  --fg: 17 24 39;            /* gray-900 */
+  --muted: 107 114 128;      /* gray-500 */
+  --brand: 37 99 235;        /* blue-600 */
+  --brand-700: 29 78 216;    /* blue-700 */
+  --accent: 99 102 241;      /* indigo-500 */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ===== Base Resets & Typography ===== */
+*,
+*::before,
+*::after { @apply box-border; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html, body { height: 100%; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply antialiased text-gray-900;
+  background:
+    radial-gradient(1200px 600px at 100% -10%, rgba(99,102,241,0.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 0%, rgba(59,130,246,0.08), transparent 60%),
+    linear-gradient(to bottom, rgb(var(--bg)) 0%, #f9fafb 100%);
 }
+
+/* Media defaults */
+img, picture, svg, video, canvas { display: block; max-width: 100%; }
+
+/* Links */
+a { @apply text-blue-600 hover:text-blue-700 underline-offset-2; }
+/* ❌ Removed: a.no-underline { @apply no-underline; }  (circular) */
+/* If you want a custom plain link helper, use this instead: */
+@layer utilities {
+  .link-plain { text-decoration: none; }
+}
+
+/* Headings */
+h1 { @apply text-4xl md:text-5xl font-extrabold tracking-tight; }
+h2 { @apply text-2xl md:text-3xl font-bold; }
+h3 { @apply text-xl md:text-2xl font-semibold; }
+
+/* Paragraph rhythm */
+p { @apply leading-relaxed; }
+
+/* ===== Reusable Components ===== */
+
+/* Buttons */
+.btn { @apply inline-flex items-center justify-center rounded-lg font-semibold transition shadow-sm disabled:opacity-60 disabled:cursor-not-allowed; }
+.btn-primary { @apply bg-blue-600 text-white hover:bg-blue-700; }
+.btn-outline { @apply border border-gray-300 text-gray-800 hover:bg-gray-50; }
+.btn-ghost { @apply text-gray-700 hover:bg-gray-100; }
+.btn-lg { @apply px-6 py-3; }
+.btn-md { @apply px-4 py-2; }
+.btn-sm { @apply px-3 py-1.5 text-sm; }
+
+/* Cards */
+.card { @apply rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow; }
+.card-padding { @apply p-4 md:p-5; }
+
+/* Badges */
+.badge { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium; }
+.badge-brand { @apply bg-blue-50 text-blue-700; }
+.badge-muted { @apply bg-gray-100 text-gray-700; }
+.badge-danger { @apply bg-rose-100 text-rose-700; }
+
+/* Header */
+.header { @apply sticky top-0 z-50 bg-white/95 backdrop-blur shadow-md; }
+.header-inner { @apply max-w-6xl mx-auto px-6 py-4 flex items-center justify-between; }
+
+/* Hero */
+.hero { @apply relative w-full rounded-2xl overflow-hidden shadow-md; }
+.hero-surface {
+  @apply text-center py-16 md:py-20 px-6;
+  background: linear-gradient(
+    to right,
+    rgba(59,130,246,0.08),
+    rgba(255,255,255,0.85),
+    rgba(99,102,241,0.08)
+  );
+}
+.hero-title { @apply text-4xl md:text-5xl font-extrabold text-gray-900 mb-4; }
+.hero-sub { @apply text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8; }
+
+/* Grid */
+.products-grid { @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8; }
+
+/* Clamp helpers */
+.clamp-2 { @apply line-clamp-2; }
+.clamp-3 { @apply line-clamp-3; }
+
+/* Focus ring */
+:focus-visible { @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-white; }
+
+/* PayPal container */
+#paypal-button-container { @apply relative z-0; }

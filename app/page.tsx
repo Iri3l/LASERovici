@@ -1,74 +1,144 @@
-// app/page.tsx (Server Component — no "use client")
-import { Mail } from "lucide-react"
-import ClientOnly from "./components/ClientOnly"
-import ProductCarousel from "./components/ProductCarousel"
+"use client"
 
-const products = [
-  {
-    id: 1,
-    name: "Personalized Wooden Keychain",
-    price: "£12.00",
-    images: ["/images/keychain-front.jpg", "/images/keychain-back.jpg"],
-    description: "Engraved solid wood keychain with your initials or logo.",
-  },
-  {
-    id: 2,
-    name: "Custom Engraved Flask",
-    price: "£25.00",
-    images: ["/images/flask-front.jpg", "/images/flask-back.jpg"],
-    description: "Stainless steel flask engraved with your design.",
-  },
-  {
-    id: 3,
-    name: "Engraved Metal Plaque",
-    price: "£40.00",
-    images: ["/images/plaque-front.jpg", "/images/plaque-back.jpg"],
-    description: "Durable metal plaque with laser-etched precision text.",
-  },
-]
+import { useState } from "react"
+import Zoom from "react-medium-image-zoom"
+import "react-medium-image-zoom/dist/styles.css"
 
-export default function LaserEngravingCatalog() {
+import Hero from "./components/Hero"
+import { products, type Product } from "./data/products"
+import { useCart } from "./context/CartContext"
+
+export default function HomePage() {
+  const { addToCart } = useCart()
+
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col">
-      <section className="text-center py-16 px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
-          Laser-Engraved Catalog
-        </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Unique, personalized, and built to last. Browse our curated collection of laser-engraved items.
-        </p>
-      </section>
+    <main className="min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-gray-900">
+      <div className="max-w-7xl mx-auto px-6 pb-16">
+        {/* HERO */}
+        <Hero />
 
-      <section className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-6 md:px-12 pb-20 flex-1">
-        {products.map((product) => (
-          <div key={product.id} className="bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col">
-            {/* Client-only carousel to avoid hydration issues */}
-            <ClientOnly>
-              <ProductCarousel images={product.images} />
-            </ClientOnly>
+        {/* Section title */}
+        <header className="mt-10 mb-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+            Our Products
+          </h2>
+          <p className="mt-2 text-white/80">
+            Tap an image to zoom. Use thumbnails to view front/back and more.
+          </p>
+        </header>
 
-            <div className="p-4 flex flex-col flex-1">
-              <h2 className="text-xl font-semibold text-gray-800">{product.name}</h2>
-              <p className="text-gray-500 text-sm mt-1">{product.description}</p>
-              <p className="text-gray-900 font-bold mt-2">{product.price}</p>
-              <div className="mt-auto pt-4">
-                <a
-                  href="mailto:orders@irinel-engraving.example?subject=Order%20Inquiry"
-                  className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800"
-                >
-                  <Mail className="w-4 h-4 mr-2" />
-                  Contact to Order
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      <footer className="bg-gray-800 text-gray-200 py-8 text-center text-sm">
-        <p>&copy; 2025 Irinel Engraving. All rights reserved.</p>
-        <p className="mt-2">Crafted with ❤️ in the UK</p>
-      </footer>
+        {/* GRID */}
+        <section
+          id="products"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+        >
+          {products.map((p) => (
+            <ProductCard key={p.id} product={p} onAdd={() => addToCart(
+              {
+                id: p.id,
+                name: p.name,
+                price: Number(p.price),
+                image: (Array.isArray(p.images) && p.images.length ? p.images[0] : "/images/placeholder.jpg"),
+              },
+              1
+            )} />
+          ))}
+        </section>
+      </div>
     </main>
+  )
+}
+
+/* ================= Product Card ================= */
+
+function ProductCard({
+  product,
+  onAdd,
+}: {
+  product: Product
+  onAdd: () => void
+}) {
+  const imageList =
+    Array.isArray(product.images) && product.images.length > 0
+      ? product.images
+      : ["/images/placeholder.jpg"]
+
+  const [activeSrc, setActiveSrc] = useState(imageList[0])
+
+  return (
+    <article className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col hover:-translate-y-0.5 transition-transform">
+      {/* Main Image (Zoomable) */}
+      <div className="relative">
+        <Zoom>
+          <img
+            src={activeSrc}
+            alt={product.name}
+            className="w-full h-56 object-cover cursor-zoom-in"
+            loading="lazy"
+          />
+        </Zoom>
+
+        {/* Decorative gradient edge */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/10 to-transparent" />
+      </div>
+
+      {/* Thumbnails */}
+      <div className="px-4 pt-3">
+        <div className="flex gap-2 overflow-x-auto pb-1">
+          {imageList.map((src, idx) => (
+            <button
+              key={`${product.id}-${idx}`}
+              onClick={() => setActiveSrc(src)}
+              aria-label={`View image ${idx + 1} of ${product.name}`}
+              className={`relative shrink-0 rounded-md border-2 ${
+                activeSrc === src ? "border-blue-600" : "border-transparent"
+              }`}
+              style={{ lineHeight: 0 }}
+            >
+              <img
+                src={src}
+                alt={`${product.name} ${idx + 1}`}
+                className="w-14 h-14 object-cover rounded-md"
+                loading="lazy"
+              />
+              {/* Optional “Front/Back” labels for first two images */}
+              {idx < 2 && (
+                <span className="absolute bottom-1 left-1 text-[10px] px-1.5 py-0.5 rounded bg-black/60 text-white">
+                  {idx === 0 ? "Front" : "Back"}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-4 flex flex-col flex-1">
+        <h3 className="text-lg md:text-xl font-semibold text-gray-900">
+          {product.name}
+        </h3>
+
+        <p className="mt-1 text-sm text-gray-600 line-clamp-3">
+          {product.description}
+        </p>
+
+        <div className="mt-4 flex items-end justify-between">
+          <div>
+            <p className="text-xs text-gray-500">Price</p>
+            <p className="text-xl font-extrabold text-blue-700">
+              £{Number(product.price).toFixed(2)}
+            </p>
+          </div>
+
+          <button
+            onClick={onAdd}
+            className="inline-flex items-center justify-center rounded-lg bg-blue-600 text-white font-medium px-4 py-2 hover:bg-blue-700 transition"
+            aria-label={`Add ${product.name} to basket`}
+          >
+            Add to Basket
+          </button>
+        </div>
+      </div>
+    </article>
   )
 }
