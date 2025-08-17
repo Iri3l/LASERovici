@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
-  // images: { unoptimized: true }, // uncomment if you use next/image on static hosting
-};
+  output: "export",          // you already have this for IONOS
+  images: { unoptimized: true }, // ✅ allow next/image in static export
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

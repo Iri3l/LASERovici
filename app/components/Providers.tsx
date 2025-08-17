@@ -1,3 +1,4 @@
+// app/components/Providers.tsx
 "use client"
 
 import { ReactNode } from "react"
@@ -11,7 +12,7 @@ export default function Providers({ children }: { children: ReactNode }) {
   return (
     <PayPalScriptProvider
       options={{
-        clientId: PAYPAL_CLIENT_ID, // ✅ use camelCase, not "client-id"
+        clientId: PAYPAL_CLIENT_ID, // camelCase required by types
         currency: "GBP",
         intent: "capture",
       }}
