@@ -28,12 +28,12 @@
     "typescript": "5.9.2"
   },
   
-  "scripts": {
+  "scripts": {}
     "build": "next build",
-    "export": "next export",
-    "build:static": "npm run build && npm run export",
     "start": "next start"
-  }
 }
 
+
+
+  
 
