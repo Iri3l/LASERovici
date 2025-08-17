@@ -9,7 +9,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -17,18 +16,17 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"   # You can change to 18 if your project uses it
+          node-version: "20"
           cache: "npm"
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install deps (clean)
+        run: npm ci
 
-      - name: Run lint
+      - name: Lint
         run: npm run lint --if-present
 
-      - name: Run tests
+      - name: Test
         run: npm test --if-present
 
-      - name: Build project
+      - name: Build
         run: npm run build
-
