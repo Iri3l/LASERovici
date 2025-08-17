@@ -1,4 +1,5 @@
 # LASERovici
+[![CI](https://github.com/Iri3l/LASERovici/actions/workflows/ci.yml/badge.svg)](https://github.com/Iri3l/LASERovici/actions/workflows/ci.yml)
 
 An online shop for custom **laser engraving** products.  
 Built with **Next.js**, **TailwindCSS**, and **PayPal/Stripe integration**.
