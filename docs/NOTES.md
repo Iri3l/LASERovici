@@ -27,6 +27,7 @@
 ---
 
 ### ✅ Versioning
-- **v1.0 Baseline** – current working deployed version.  
-- Next changes will be tagged **v1.1**, **v1.2**, etc.  
+- **v1.0 Baseline** – first deployed version.  
+- **v1.1** – CI & Auto-deploy baseline (IONOS Deploy Now + GitHub Actions). ← *current live*  
+- Next changes will be tagged **v1.2**, **v1.3**, etc.  
 - Full details of each version are documented in **CHANGELOG.md**.
