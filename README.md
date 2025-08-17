@@ -1,5 +1,12 @@
 # LASERovici
+
 [![CI](https://github.com/Iri3l/LASERovici/actions/workflows/ci.yml/badge.svg)](https://github.com/Iri3l/LASERovici/actions/workflows/ci.yml)
+![License](https://img.shields.io/badge/license-TBD-lightgrey)
+![Node](https://img.shields.io/badge/node-20.x-green)
+
+An online shop for custom **laser engraving** products.  
+Built with **Next.js**, **TailwindCSS**, and **PayPal/Stripe integration**.
+
 
 An online shop for custom **laser engraving** products.  
 Built with **Next.js**, **TailwindCSS**, and **PayPal/Stripe integration**.
