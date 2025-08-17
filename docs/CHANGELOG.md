@@ -1,34 +1,20 @@
-# Changelog
-
-All notable changes to this project will be documented in this file.  
-This project follows semantic versioning (vMAJOR.MINOR).
-
----
-
-## [v1.0] – Baseline (Current Live)
+## [v1.1] – CI & Auto-deploy baseline (2025-08-17)
 ### Added
-- Basket with **sticky PayPal checkout bar**.  
-- Multiple images per product on the main page.  
-- SEO metadata, Open Graph, and Twitter cards.  
-- Custom animated **LASERovici logo** with pulsing laser underline.  
+- **GitHub Actions CI** (`.github/workflows/ci.yml`) running install + build on pushes/PRs (Node 20).
+- **IONOS Deploy Now** auto-deploy from branch using static export (`npm run build`, output `out`).  
+- **README** status badge for CI.
 
 ### Changed
-- Unified header + footer gradients.  
-- Links styled: more visible colors, no underline.  
+- `next.config.js`: `output: 'export'` and `images.unoptimized: true`.
+- `package.json` scripts simplified to `"build": "next build"`, `"start": "next start"`.
+- `.gitignore` cleaned (archives, Word docs).
 
-### Fixed
-- Error `removeChild` in header adjustment.  
+### Removed / Cleanup
+- Replaced `next export` command with `output: 'export'`.
+- Stopped tracking bulky archives (`*.zip`) and `*.docx`.
 
-### Deployment
-- Configured deployment with `{ images: { unoptimized: true } }`.  
-
----
-
-## [Upcoming v1.1] – Planned
-### Added
-- Apple Pay + Google Pay integration (via Stripe or direct).  
-- Subscription form for promotions & holiday sales.  
-
-### Changed
-- Improved mobile header spacing & refined menu.  
-- Professional font exploration for LASERovici brand.  
+## [Upcoming v1.2] – Planned
+- Apple Pay + Google Pay integration (Stripe).
+- Subscription form for promotions & holiday sales.
+- Improved mobile header spacing & refined menu.
+- Professional font exploration for LASERovici brand.
