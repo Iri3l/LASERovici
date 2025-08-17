@@ -26,5 +26,13 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "typescript": "5.9.2"
+  }{
+  "scripts": {
+    "build": "next build",
+    "export": "next export",
+    "build:static": "npm run build && npm run export",
+    "start": "next start"
   }
+}
+
 }
