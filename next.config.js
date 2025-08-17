@@ -1,14 +1,8 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export',               // <-- tells Next to make a static export
-  images: { unoptimized: true },  // good for static hosting
-  // optional, helps on some static hosts:
-  // trailingSlash: true
-};
-
-module.exports = nextConfig;
 const nextConfig = {
   output: 'export',
   images: { unoptimized: true },
+  // optional: trailingSlash: true,
 };
 module.exports = nextConfig;
