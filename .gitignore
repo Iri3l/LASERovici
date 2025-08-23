@@ -16,3 +16,10 @@ yarn-error.log*
 *.zip
 *.avi
 *.mkv
+
+# Large media we won't commit
+*.mov
+*.mp4
+*.zip
+*.avi
+*.mkv
