@@ -9,3 +9,10 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Large media we won't commit
+*.mov
+*.mp4
+*.zip
+*.avi
+*.mkv
