@@ -16,29 +16,38 @@ export type Product = {
 export const products: Product[] = [
   {
     id: 1,
-    name: "Engraved Wooden Keychain",
-    price: 9.99,
-    images: ["/images/keychain-front.jpg", "/images/keychain-back.jpg"],
-    description:
-      "A stylish wooden keychain with custom laser engraving. Perfect for gifts or personal keepsakes.",
+    name: "Engraved Aluminium Business Card (Ask for Bulk Orders)",
+    price: 3.40,
+    images: ["/images/businessCard.jpg"],
+description:
+      `Introducing our exquisite 0.2mm aluminium business cards, the perfect blend of durability and elegance! Crafted from high-quality aluminium, these cards are not only lightweight but also incredibly strong, making them a lasting impression in the world of networking.
+Each card is precision-engraved with your unique design, ensuring that your brand stands out with a modern and professional aesthetic. The sleek metallic finish adds a touch of sophistication, while the matte or brushed options give a contemporary feel that’s sure to catch the eye.
+Ideal for entrepreneurs, creatives, and professionals alike, these business cards are perfect for making a memorable statement at meetings, conferences, or networking events. With their resistance to wear and tear, they’ll maintain their pristine appearance, representing your brand effectively over time.
+Upgrade your networking game with our aluminium business cards and leave a lasting impression that speaks volumes about your brand’s quality and commitment to excellence!`,
     favorites: 0,
   },
   {
     id: 2,
-    name: "Personalized Metal Bottle",
-    price: 19.99,
-    images: ["/images/bottle-front.jpg", "/images/bottle-back.jpg"],
+    name: "Dog Tag Stainless Steel",
+    price: 6.50,
+    images: ["/images/dogTagFront.jpg", "/images/dogTagBack.jpg"],
     description:
-      "Durable stainless steel bottle with your custom engraving. Keeps drinks hot or cold for hours.",
+      `Introducing our premium laser-engraved stainless steel dog tags, designed to provide both style and security for your beloved pet! Crafted from high-quality stainless steel, these tags are not only durable and resistant to wear, but they also feature a sleek, polished finish that catches the eye.
+Each tag is expertly engraved with your pet’s name and your contact information, ensuring that they can always find their way back home. The precision laser engraving guarantees clear visibility, so important details are easy to read. Plus, the smooth edges ensure comfort for your furry friend, making it the perfect accessory for everyday wear.
+Available in various shapes and sizes, our dog tags can be customised to match your pet’s personality. Whether you prefer a classic round tag or a trendy bone shape, we’ve got you covered. With our stainless steel dog tags, you can rest assured knowing that your pet is not only stylish but also safe.
+Give your pet the gift of security with our laser-engraved stainless steel dog tags and let their personality shine through!`,
     favorites: 0,
   },
   {
     id: 3,
-    name: "Custom Leather Wallet",
-    price: 34.99,
-    images: ["/images/wallet-front.jpg", "/images/wallet-back.jpg"],
+    name: "Selfie :-)",
+    price: 5.00,
+    images: ["/images/selfie.jpg"],
     description:
-      "Premium leather wallet engraved with initials or a short message. Timeless, practical, and unique.",
+      `Introducing our stunning 0.2mm thick aluminium cards, perfect for showcasing your cherished memories! These lightweight yet durable cards are designed for engraving high-quality images, allowing you to immortalise your favourite moments in style.
+Each card features a sleek surface ideal for detailed engraving, making it easy to customise with your chosen pictures. Once engraved, you can display your cards in a stylish frame or simply place them on a shelf, creating a unique and personal touch to any space.
+Whether you’re looking to celebrate special occasions, commemorate milestones, or simply decorate your home, these aluminium cards offer a modern and elegant way to display your memories. Their minimalist design complements any decor, making them perfect gifts for loved ones or a delightful addition to your own collection.
+Elevate your space and keep your treasured moments close with our versatile aluminium cards—where memories meet artistry!`,
     favorites: 0,
   },
   {
