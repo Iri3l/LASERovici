@@ -18,3 +18,8 @@
 - Subscription form for promotions & holiday sales.
 - Improved mobile header spacing & refined menu.
 - Professional font exploration for LASERovici brand.
+## [Upcoming v1.2]
+### Changed
+- Updated product catalog with new images, refreshed descriptions, and adjusted prices.
+- Added new product assets under `public/products/`.
+

@@ -23,6 +23,9 @@
    - Light/dark theme toggle.  
    - Add `Privacy` & `Terms` pages (already drafted).  
    - Enhance product descriptions for SEO ranking.  
+   - Products updated: new images, refreshed descriptions, and prices.
+   - More product additions planned soon.
+
 
 ---
 
@@ -31,3 +34,4 @@
 - **v1.1** – CI & Auto-deploy baseline (IONOS Deploy Now + GitHub Actions). ← *current live*  
 - Next changes will be tagged **v1.2**, **v1.3**, etc.  
 - Full details of each version are documented in **CHANGELOG.md**.
+
