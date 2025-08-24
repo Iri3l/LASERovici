@@ -1,5 +1,6 @@
 // app/components/HomeClient.tsx (CLIENT)
 "use client"
+/* eslint-disable @next/next/no-img-element */
 
 import Script from "next/script"
 import { useState } from "react"
@@ -10,10 +11,9 @@ import { useCart } from "../context/CartContext"
 // Lightbox (dynamic so it’s safe with static export)
 import dynamic from "next/dynamic"
 import "yet-another-react-lightbox/styles.css"
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Lightbox = dynamic(() => import("yet-another-react-lightbox"), { ssr: false }) as any
 const Zoom = dynamic(() => import("yet-another-react-lightbox/plugins/zoom"), { ssr: false })
-
-import ProductGallery from "./ProductGallery" // (ok to keep even if not used directly here)
 
 /* --- ProductCard --- */
 function ProductCard({
@@ -89,7 +89,7 @@ function ProductCard({
         <h2 className="text-lg font-semibold text-gray-900">{product.name}</h2>
 
         {/* Collapsible description */}
-        <p className="text-gray-600 text-sm">
+        <p id={`desc-${product.id}`} className="text-gray-600 text-sm">
           {expanded ? fullDesc : shortDesc}
         </p>
 
