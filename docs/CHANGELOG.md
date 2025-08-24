@@ -1,18 +1,18 @@
 # Changelog
 
-All notable changes to this project are documented here.  
-This project loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and semantic versioning.
+All notable changes to this project are documented here.
+This project loosely follows Keep a Changelog and semantic versioning.
 
 ---
 
 ## [Unreleased] – v1.2 (In Progress)
 ### Added
-- Product gallery **lightbox with arrows + zoom** using `yet-another-react-lightbox` (keyboard + swipe support).
+- Product gallery **lightbox with arrows + zoom** using `yet-another-react-lightbox` (keyboard + swipe).
 - Product card **“See more / See less”** toggle for long descriptions.
 
 ### Changed
-- Updated product catalog with refreshed descriptions, prices, and new images.
-- New product assets added under `public/products/`.
+- Updated product catalog (new images, refreshed descriptions, adjusted prices).
+- New product assets under `public/images/` (ensure leading slash paths in code).
 
 ### Planned
 - Apple Pay + Google Pay (Stripe).
@@ -22,31 +22,44 @@ This project loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.
 
 ---
 
+## [v1.1.2] – Frontend polish & build stability (2025-08-24)
+### Fixed
+- **TypeScript compile**: cleaned `app/data/products.ts` (proper array termination; removed duplicate keys).
+- **Build error**: switched lightbox plugin imports to **regular imports** (plugins aren’t React components).
+- **ESLint during build**: added `.eslintrc.json` and `.eslintignore` to stop interactive prompts in CI.
+
+### Changed
+- Homepage product cards now show **short description by default** with a toggle to expand/collapse.
+
+### Dev / CI
+- Enabled linting in CI without prompts (`eslint` installed as dev dependency).
+- Kept Next.js static export (`output: 'export'`, `images.unoptimized: true`) aligned with IONOS Deploy Now.
+
+---
+
 ## [v1.1.1] – Maintenance & CI/Deploy Alignment (2025-08-24)
 ### Changed
-- **Next.js static export alignment:** switched fully to `next.config.js -> output: 'export'` and build via `npm run build` (no `next export` command).
-- **CI workflow simplified:** GitHub Actions now runs **install + build** (Node 20) for reliability on pushes/PRs.
-- **IONOS Deploy Now config:** build command updated to `npm ci && npm run build`, output path `out`.
+- Static export alignment (`next.config.js -> output: 'export'`) with `npm run build` (no `next export`).
+- CI workflow simplified to **install + build** (Node 20).
+- IONOS Deploy Now: build `npm ci && npm run build`, output `out`.
 
 ### Fixed
-- Removed a >100 MB committed video (`public/images/IMG_5326.MOV`) from history using `git filter-repo`; resolves GitHub push rejection.
-- Added ignores for large media (`*.mov`, `*.mp4`, `*.zip`, etc.) to prevent future repo bloat.
+- Removed >100 MB video from history via `git filter-repo`; added ignores for large media.
 
 ### Docs
-- `NOTES.md` updated to mark **v1.1 live** and record current workflow (CI + Deploy Now).
-- `CHANGELOG.md` consolidated and polished.
+- `NOTES.md` marked **v1.1 live**; polished changelog.
 
 ---
 
 ## [v1.1] – CI & Auto‑deploy Baseline (2025-08-17)
 ### Added
-- **GitHub Actions CI** (`.github/workflows/ci.yml`) running install + build on pushes/PRs (Node 20).
-- **IONOS Deploy Now** auto‑deploy from branch using static export (`npm run build`, output `out`).
-- **README** status badge for CI.
+- GitHub Actions CI (`.github/workflows/ci.yml`) on pushes/PRs (Node 20).
+- IONOS Deploy Now auto‑deploy (static export).
+- README CI status badge.
 
 ### Changed
-- `next.config.js`: `output: 'export'` and `images.unoptimized: true`.
-- `package.json` scripts simplified to `"build": "next build"`, `"start": "next start"`.
+- `next.config.js`: `output: 'export'`, `images.unoptimized: true`.
+- `package.json` scripts: `"build": "next build"`, `"start": "next start"`.
 - `.gitignore` cleaned (archives, Word docs).
 
 ### Removed / Cleanup
