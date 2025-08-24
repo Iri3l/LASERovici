@@ -6,9 +6,16 @@ import { useState } from "react"
 import Hero from "../components/Hero"
 import { products, Product } from "../data/products"
 import { useCart } from "../context/CartContext"
-import Zoom from "react-medium-image-zoom"
-import "react-medium-image-zoom/dist/styles.css"
 
+// Lightbox (dynamic so it’s safe with static export)
+import dynamic from "next/dynamic"
+import "yet-another-react-lightbox/styles.css"
+const Lightbox = dynamic(() => import("yet-another-react-lightbox"), { ssr: false }) as any
+const Zoom = dynamic(() => import("yet-another-react-lightbox/plugins/zoom"), { ssr: false })
+
+import ProductGallery from "./ProductGallery" // (ok to keep even if not used directly here)
+
+/* --- ProductCard --- */
 function ProductCard({
   product,
   addToCart,
@@ -18,16 +25,39 @@ function ProductCard({
 }) {
   const [selectedImage, setSelectedImage] = useState(product.images[0])
 
+  // Lightbox state
+  const [lbOpen, setLbOpen] = useState(false)
+  const [lbIndex, setLbIndex] = useState(0)
+  const openLightboxAt = (src: string) => {
+    const idx = product.images.findIndex((i) => i === src)
+    setLbIndex(Math.max(0, idx))
+    setLbOpen(true)
+  }
+
+  // Description collapse state
+  const [expanded, setExpanded] = useState(false)
+  const PREVIEW_LEN = 120
+  const fullDesc = product.description || ""
+  const shortDesc =
+    fullDesc.length > PREVIEW_LEN ? fullDesc.slice(0, PREVIEW_LEN) + "…" : fullDesc
+
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition">
       <div className="relative w-full h-64">
-        <Zoom>
+        {/* Main image: click opens lightbox with arrows/zoom */}
+        <button
+          type="button"
+          className="w-full h-64"
+          onClick={() => openLightboxAt(selectedImage)}
+          aria-label={`Open ${product.name} gallery`}
+        >
           <img
             src={selectedImage}
             alt={product.name}
             className="w-full h-64 object-cover"
+            draggable={false}
           />
-        </Zoom>
+        </button>
 
         {/* Thumbnails */}
         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
@@ -36,6 +66,7 @@ function ProductCard({
               key={i}
               type="button"
               onClick={() => setSelectedImage(img)}
+              onDoubleClick={() => openLightboxAt(img)} // double‑click thumb to open zoomed
               className={`w-10 h-10 rounded overflow-hidden border-2 ${
                 selectedImage === img
                   ? "border-blue-600"
@@ -47,6 +78,7 @@ function ProductCard({
                 src={img}
                 alt={`${product.name} ${i + 1}`}
                 className="w-full h-full object-cover"
+                draggable={false}
               />
             </button>
           ))}
@@ -55,10 +87,27 @@ function ProductCard({
 
       <div className="p-4 flex flex-col flex-grow">
         <h2 className="text-lg font-semibold text-gray-900">{product.name}</h2>
-        <p className="text-gray-600 text-sm flex-grow">{product.description}</p>
+
+        {/* Collapsible description */}
+        <p className="text-gray-600 text-sm">
+          {expanded ? fullDesc : shortDesc}
+        </p>
+
+        {fullDesc.length > PREVIEW_LEN && (
+          <button
+            onClick={() => setExpanded((v) => !v)}
+            className="text-blue-600 text-sm mt-1 self-start hover:underline"
+            aria-expanded={expanded}
+            aria-controls={`desc-${product.id}`}
+          >
+            {expanded ? "See less" : "See more"}
+          </button>
+        )}
+
         <p className="mt-2 text-lg font-bold text-blue-600">
           £{product.price.toFixed(2)}
         </p>
+
         <button
           onClick={() =>
             addToCart({
@@ -73,10 +122,24 @@ function ProductCard({
           Add to Basket
         </button>
       </div>
+
+      {/* Lightbox with arrows + zoom */}
+      {lbOpen && (
+        <Lightbox
+          open={lbOpen}
+          close={() => setLbOpen(false)}
+          index={lbIndex}
+          slides={product.images.map((src) => ({ src }))}
+          plugins={[Zoom]}
+          controller={{ closeOnBackdropClick: true }}
+          carousel={{ finite: false }} // wrap-around
+        />
+      )}
     </div>
   )
 }
 
+/* --- HomeClient --- */
 export default function HomeClient() {
   const { addToCart } = useCart()
 
@@ -84,17 +147,8 @@ export default function HomeClient() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Organization",
-        "name": "LASERovici Engraving",
-        "url": "https://shop.lazarovici.co.uk",
-        "sameAs": [] // add socials later if you want
-      },
-      {
-        "@type": "WebSite",
-        "name": "LASERovici Engraving",
-        "url": "https://shop.lazarovici.co.uk"
-      }
+      { "@type": "Organization", name: "LASERovici Engraving", url: "https://shop.lazarovici.co.uk", sameAs: [] },
+      { "@type": "WebSite", name: "LASERovici Engraving", url: "https://shop.lazarovici.co.uk" }
     ]
   }
 
@@ -114,11 +168,7 @@ export default function HomeClient() {
         <h1 className="text-3xl font-bold mb-8 text-white">Our Products</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {products.map((product: Product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              addToCart={addToCart}
-            />
+            <ProductCard key={product.id} product={product} addToCart={addToCart} />
           ))}
         </div>
       </div>

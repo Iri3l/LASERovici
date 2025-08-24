@@ -1,6 +1,6 @@
-// app/page.tsx (SERVER COMPONENT)
-import type { Metadata } from "next"
-import HomeClient from "./components/HomeClient"
+import type { Metadata } from "next";
+import HomeClient from "./components/HomeClient";
+import ProductGallery from "./components/ProductGallery";
 
 export const metadata: Metadata = {
   title: "Custom Laser Engraving in the UK | LASERovici Engraving",
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
       "Personalised laser engraving for gifts, décor, and accessories. Quality craftsmanship and careful packaging.",
     images: ["/logo.jpg"],
   },
-}
+};
 
 export default function Page() {
-  return <HomeClient />
+  return <HomeClient />; // Keep your existing homepage
 }
