@@ -52,11 +52,19 @@ Elevate your space and keep your treasured moments close with our versatile alum
   },
   {
     id: 4,
-    name: "Engraved Wooden Phone Stand",
-    price: 14.99,
-    images: ["/images/stand-front.jpg", "/images/stand-back.jpg"],
-    description:
-      "Minimalist wooden phone stand with a sleek laser engraving. Perfect for desks or nightstands.",
+    name: "Engraved RFID (pre-order, not in stock)",
+    price: 30.00,
+    images: ["/images/walletF.jpg", "/images/walletB.jpg"],
+description:
+      `Engraved RFID Card Protector: Metal and Wood Elegance
+Protect your cards in style with our unique engraved RFID card protector. Crafted with a stunning combination of durable metal and rich wood, this card holder not only safeguards your essential cards from identity theft but also adds a touch of sophistication to your everyday carry.
+The sleek metal side offers robust protection against RFID skimming, while the beautifully engraved wooden side provides a warm, natural aesthetic. Personalise it with your choice of engraving, making it a perfect gift for yourself or a loved one.
+Features:
+• Dual Material Design: Metal for maximum durability and wood for a touch of elegance.
+• Custom Engraving: Personalise with initials, a special date, or a unique design.
+• RFID Protection: Safeguards against electronic pickpocketing.
+• Compact Size: Fits easily in your pocket or wallet.
+Elevate your accessory game while ensuring your peace of mind. Order yours today!`,
     favorites: 0,
   },
   {
