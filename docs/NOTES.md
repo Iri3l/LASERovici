@@ -1,6 +1,10 @@
 # LASERovici Engraving – Project Notes
 
 ### 📌 Last Working State
+- Basket logic fixed:
+  - “−” decrements by 1 (removes line only when qty = 0).
+  - “Remove” deletes entire line immediately.
+- `products.ts` cleaned up, build runs successfully.
 - Basket works with **sticky PayPal checkout bar**.
 - Multiple images per product work on the main page.
 - SEO metadata, Open Graph, and Twitter cards added.

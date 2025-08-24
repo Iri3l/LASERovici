@@ -21,6 +21,14 @@ This project loosely follows Keep a Changelog and semantic versioning.
 - Professional font exploration for LASERovici brand.
 
 ---
+## [v1.1.3] – Cart fixes & data cleanup (2025-08-24)
+### Fixed
+- **Basket decrement button** now decreases quantity by 1 instead of removing the whole line.
+- Added `removeItem()` in CartContext so “Remove” deletes a product line, while `removeFromCart()` decrements quantity.
+- Cleaned `products.ts` syntax (properly closed array, no stray braces); build now passes locally & in CI.
+
+### Changed
+- Basket UI wired to new `removeItem()` + `removeFromCart(id, qty)`.
 
 ## [v1.1.2] – Frontend polish & build stability (2025-08-24)
 ### Fixed

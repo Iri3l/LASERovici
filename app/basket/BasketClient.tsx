@@ -1,5 +1,6 @@
 // app/basket/BasketClient.tsx (CLIENT)
 "use client"
+/* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
@@ -7,19 +8,16 @@ import { useCart } from "../context/CartContext"
 import { PayPalButtons } from "@paypal/react-paypal-js"
 
 export default function BasketClient() {
-  const { cart, addToCart, removeFromCart, clearCart } = useCart()
+  // make sure your CartContext exports removeItem in addition to removeFromCart
+  const { cart, addToCart, removeFromCart, removeItem, clearCart } = useCart()
 
-  // Hydration-safe flag
+  // Hydration-safe rendering
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
-  // Declare ALL hooks before any conditional rendering
+  // Totals
   const subtotal = useMemo(
-    () =>
-      cart.reduce(
-        (sum, item) => sum + Number(item.price) * Number(item.quantity),
-        0
-      ),
+    () => cart.reduce((sum, item) => sum + Number(item.price) * Number(item.quantity), 0),
     [cart]
   )
   const totalItems = useMemo(
@@ -44,7 +42,7 @@ export default function BasketClient() {
           {/* Items */}
           <div className="lg:col-span-2 space-y-4">
             {!mounted ? (
-              // Skeleton (keeps DOM stable across SSR/CSR)
+              // Skeleton during hydration
               <>
                 <div className="rounded-xl bg-white/10 p-6 h-24 animate-pulse" />
                 <div className="rounded-xl bg-white/10 p-6 h-24 animate-pulse" />
@@ -53,10 +51,7 @@ export default function BasketClient() {
               <div className="rounded-xl bg-white/10 p-6">
                 <p className="text-white/90">
                   Your basket is empty.{" "}
-                  <Link
-                    href="/#products"
-                    className="underline underline-offset-4"
-                  >
+                  <Link href="/#products" className="underline underline-offset-4">
                     Browse products
                   </Link>
                   .
@@ -73,17 +68,16 @@ export default function BasketClient() {
                     alt={item.name}
                     className="w-20 h-20 rounded-lg object-cover"
                   />
+
                   <div className="flex-1 min-w-0">
                     <h2 className="font-semibold truncate">{item.name}</h2>
-                    <p className="text-white/80 text-sm">
-                      £{Number(item.price).toFixed(2)}
-                    </p>
+                    <p className="text-white/80 text-sm">£{Number(item.price).toFixed(2)}</p>
 
                     <div className="mt-2 flex items-center gap-2">
-                      {/* Decrement */}
+                      {/* Decrement by 1 */}
                       <button
                         type="button"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeFromCart(item.id, 1)}
                         className="px-2 py-1 rounded bg-white/20 hover:bg-white/30"
                         aria-label="Decrease quantity"
                       >
@@ -91,11 +85,9 @@ export default function BasketClient() {
                       </button>
 
                       {/* Qty */}
-                      <span className="px-3 py-1 rounded bg-white/10">
-                        {item.quantity}
-                      </span>
+                      <span className="px-3 py-1 rounded bg-white/10">{item.quantity}</span>
 
-                      {/* Increment */}
+                      {/* Increment by 1 */}
                       <button
                         type="button"
                         onClick={() =>
@@ -104,8 +96,7 @@ export default function BasketClient() {
                               id: item.id,
                               name: item.name,
                               price: Number(item.price),
-                              image:
-                                item.image ?? "/images/placeholder.jpg",
+                              image: item.image ?? "/images/placeholder.jpg",
                             },
                             1
                           )
@@ -116,10 +107,10 @@ export default function BasketClient() {
                         +
                       </button>
 
-                      {/* Remove (Option A semantics: same as decrement until 0) */}
+                      {/* Remove whole line */}
                       <button
                         type="button"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeItem(item.id)}
                         className="ml-3 text-red-300 hover:text-red-200 underline underline-offset-4"
                       >
                         Remove
@@ -135,6 +126,7 @@ export default function BasketClient() {
           <div className="lg:sticky lg:top-24">
             <div className="rounded-2xl bg-white/10 p-6">
               <h3 className="text-xl font-semibold">Order Summary</h3>
+
               <div className="mt-4 space-y-2 text-white/90">
                 <div className="flex justify-between">
                   <span>Items</span>
@@ -188,7 +180,7 @@ export default function BasketClient() {
                       console.error("PayPal error:", err)
                       alert("Sorry, PayPal checkout failed. Please try again.")
                     }}
-                    // Update PayPal when totals change
+                    // re-render when totals change
                     forceReRender={[subtotal.toFixed(2), String(totalItems)]}
                   />
                 </div>
