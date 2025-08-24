@@ -1,6 +1,6 @@
+// app/page.tsx
 import type { Metadata } from "next";
 import HomeClient from "./components/HomeClient";
-import ProductGallery from "./components/ProductGallery";
 
 export const metadata: Metadata = {
   title: "Custom Laser Engraving in the UK | LASERovici Engraving",
@@ -27,5 +27,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <HomeClient />; // Keep your existing homepage
+  return <HomeClient />;
 }

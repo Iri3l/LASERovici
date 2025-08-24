@@ -8,12 +8,10 @@ import Hero from "../components/Hero"
 import { products, Product } from "../data/products"
 import { useCart } from "../context/CartContext"
 
-// Lightbox (dynamic so it’s safe with static export)
-import dynamic from "next/dynamic"
+// Lightbox (regular imports — plugins aren’t React components)
+import Lightbox from "yet-another-react-lightbox"
+import Zoom from "yet-another-react-lightbox/plugins/zoom"
 import "yet-another-react-lightbox/styles.css"
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Lightbox = dynamic(() => import("yet-another-react-lightbox"), { ssr: false }) as any
-const Zoom = dynamic(() => import("yet-another-react-lightbox/plugins/zoom"), { ssr: false })
 
 /* --- ProductCard --- */
 function ProductCard({
