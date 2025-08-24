@@ -30,13 +30,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <Providers>
           <Header />
+          {/* Reserve header height ONLY on mobile (h-16 ≈ 64px) */}
+          <div className="h-[calc(4rem+env(safe-area-inset-top))] md:h-0" />
           {children}
           <Footer />
         </Providers>
       </body>
     </html>
-  )
+  );
 }

@@ -35,10 +35,14 @@ export default function Header() {
   }, [liveCount, mounted])
 
   return (
-    <header className="fixed md:sticky top-0 inset-x-0 z-50 border-b border-white/10
-             bg-gradient-to-r from-[#0B1530]/90 via-[#152553]/90 to-[#1D3A8A]/90
-             backdrop-blur-md shadow-lg">
-
+    <header className="
+    fixed md:sticky top-0 inset-x-0 z-50
+    border-b border-white/10
+    bg-gradient-to-r from-[#0B1530]/90 via-[#152553]/90 to-[#1D3A8A]/90
+    backdrop-blur-md shadow-lg
+    pt-[env(safe-area-inset-top)]
+  "
+>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Top row */}
         <div className="h-16 md:h-18 flex items-center justify-between">
