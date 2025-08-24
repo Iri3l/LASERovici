@@ -14,8 +14,8 @@ export type CartItem = {
 type CartContextValue = {
   cart: CartItem[];
   addToCart: (item: Omit<CartItem, "quantity">, qty?: number) => void;
-  removeFromCart: (id: number, qty?: number) => void; // decrement qty
-  removeItem: (id: number) => void; // remove line entirely
+  removeFromCart: (id: number, qty?: number) => void; // decrement
+  removeItem: (id: number) => void;                    // remove line
   clearCart: () => void;
 };
 
@@ -24,23 +24,36 @@ const CartContext = createContext<CartContextValue | undefined>(undefined);
 const STORAGE_KEY = "laserovici.cart.v1";
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  // Lazy init: read localStorage before first paint (client component, so window is defined)
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    try {
+      if (typeof window === "undefined") return [];
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? (JSON.parse(raw) as CartItem[]) : [];
+    } catch {
+      return [];
+    }
+  });
 
-  // hydrate from localStorage
+  // Persist on change
   useEffect(() => {
     try {
-      const raw = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
-      if (raw) setCart(JSON.parse(raw));
-    } catch {}
-  }, []);
-  // persist to localStorage
-  useEffect(() => {
-    try {
-      if (typeof window !== "undefined") {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
-      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
     } catch {}
   }, [cart]);
+
+  // Sync across tabs
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY && e.newValue) {
+        try {
+          setCart(JSON.parse(e.newValue));
+        } catch {}
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
 
   const addToCart: CartContextValue["addToCart"] = (item, qty = 1) => {
     setCart((prev) => {
@@ -64,7 +77,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         next[idx] = { ...next[idx], quantity: nextQty };
         return next;
       }
-      // remove line when qty hits 0 or below
       return prev.filter((i) => i.id !== id);
     });
   };

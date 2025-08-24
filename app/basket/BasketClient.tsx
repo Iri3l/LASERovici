@@ -8,12 +8,14 @@ import { useCart } from "../context/CartContext"
 import { PayPalButtons } from "@paypal/react-paypal-js"
 
 export default function BasketClient() {
-  // make sure your CartContext exports removeItem in addition to removeFromCart
   const { cart, addToCart, removeFromCart, removeItem, clearCart } = useCart()
 
   // Hydration-safe rendering
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
+
+  // T&C checkbox: starts UNCHECKED every time (no persistence)
+  const [tcAccepted, setTcAccepted] = useState(false)
 
   // Totals
   const subtotal = useMemo(
@@ -42,7 +44,6 @@ export default function BasketClient() {
           {/* Items */}
           <div className="lg:col-span-2 space-y-4">
             {!mounted ? (
-              // Skeleton during hydration
               <>
                 <div className="rounded-xl bg-white/10 p-6 h-24 animate-pulse" />
                 <div className="rounded-xl bg-white/10 p-6 h-24 animate-pulse" />
@@ -138,51 +139,90 @@ export default function BasketClient() {
                 </div>
               </div>
 
-              {/* PayPal buttons only after mount to avoid hydration issues */}
+              {/* T&C inline gate */}
               {mounted && cart.length > 0 && (
-                <div className="mt-6">
-                  <PayPalButtons
-                    style={{
-                      layout: "horizontal",
-                      color: "gold",
-                      label: "checkout",
-                      shape: "rect",
-                      height: 45,
-                      tagline: false,
-                    }}
-                    createOrder={(_data, actions) =>
-                      actions.order.create({
-                        intent: "CAPTURE",
-                        purchase_units: [
-                          {
-                            amount: {
-                              currency_code: "GBP",
-                              value: subtotal.toFixed(2),
+                <div className="mt-5 space-y-3">
+                  <label className="flex items-start gap-2">
+                    <input
+                      type="checkbox"
+                      className="mt-1 h-4 w-4"
+                      checked={tcAccepted}
+                      onChange={(e) => setTcAccepted(e.currentTarget.checked)}
+                    />
+                    <span className="text-sm text-white/90">
+                      I have read and accept the{" "}
+                      <Link href="/terms" target="_blank" className="underline underline-offset-4">
+                        Terms &amp; Conditions
+                      </Link>{" "}
+                      and{" "}
+                      <Link href="/privacy" target="_blank" className="underline underline-offset-4">
+                        Privacy Policy
+                      </Link>
+                      .
+                    </span>
+                  </label>
+
+                  {/* PayPal buttons; blocked by overlay until T&C checked */}
+                  <div className="relative">
+                    {!tcAccepted && (
+                      <div
+                        className="absolute inset-0 z-10 rounded-lg bg-black/20 backdrop-blur-sm flex items-center justify-center pointer-events-auto"
+                        aria-hidden="true"
+                      >
+                        <span className="text-xs text-white/90 bg-black/40 px-2 py-1 rounded">
+                          Please accept Terms &amp; Conditions to continue
+                        </span>
+                      </div>
+                    )}
+
+                    <div className={!tcAccepted ? "pointer-events-none select-none opacity-70" : ""}>
+                      <PayPalButtons
+                        style={{
+                          layout: "horizontal",
+                          color: "gold",
+                          label: "checkout",
+                          shape: "rect",
+                          height: 45,
+                          tagline: false,
+                        }}
+                        onClick={(_data, actions) => {
+                          if (!tcAccepted) return actions.reject()
+                          return actions.resolve()
+                        }}
+                        createOrder={(_data, actions) =>
+                          actions.order.create({
+                            intent: "CAPTURE",
+                            purchase_units: [
+                              {
+                                amount: {
+                                  currency_code: "GBP",
+                                  value: subtotal.toFixed(2),
+                                },
+                              },
+                            ],
+                            application_context: {
+                              shipping_preference: "GET_FROM_FILE",
                             },
-                          },
-                        ],
-                        application_context: {
-                          shipping_preference: "GET_FROM_FILE",
-                        },
-                      })
-                    }
-                    onApprove={async (_data, actions) => {
-                      if (!actions.order) return
-                      const details = await actions.order.capture()
-                      alert(
-                        `Transaction completed by ${
-                          details.payer?.name?.given_name || "customer"
-                        }`
-                      )
-                      clearCart()
-                    }}
-                    onError={(err) => {
-                      console.error("PayPal error:", err)
-                      alert("Sorry, PayPal checkout failed. Please try again.")
-                    }}
-                    // re-render when totals change
-                    forceReRender={[subtotal.toFixed(2), String(totalItems)]}
-                  />
+                          })
+                        }
+                        onApprove={async (_data, actions) => {
+                          if (!actions.order) return
+                          const details = await actions.order.capture()
+                          alert(
+                            `Transaction completed by ${
+                              details.payer?.name?.given_name || "customer"
+                            }`
+                          )
+                          clearCart()
+                        }}
+                        onError={(err) => {
+                          console.error("PayPal error:", err)
+                          alert("Sorry, PayPal checkout failed. Please try again.")
+                        }}
+                        forceReRender={[subtotal.toFixed(2), String(totalItems), String(tcAccepted)]}
+                      />
+                    </div>
+                  </div>
                 </div>
               )}
 
