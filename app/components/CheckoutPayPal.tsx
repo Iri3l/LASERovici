@@ -1,66 +1,67 @@
-// app/components/CheckoutPayPal.tsx
-"use client"
+// app/components/CheckoutPayPal.tsx (CLIENT)
+"use client";
+/* eslint-disable @next/next/no-img-element */
 
-import { PayPalButtons } from "@paypal/react-paypal-js"
-import { useCart } from "../context/CartContext"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react";
+import { PayPalButtons } from "@paypal/react-paypal-js";
+import { useCart } from "../context/CartContext";
 
 export default function CheckoutPayPal() {
-  const { cart, total, clearCart } = useCart()
-  const [mounted, setMounted] = useState(false)
+  const { cart, clearCart } = useCart();
 
-  // Avoid hydration issues
-  useEffect(() => setMounted(true), [])
+  // avoid hydration mismatch
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-  // Build purchase_units items (optional but nice)
-  const items = useMemo(
-    () =>
-      cart.map((i) => ({
-        name: i.name,
-        unit_amount: { currency_code: "GBP", value: Number(i.price).toFixed(2) },
-        quantity: String(i.quantity),
-      })),
+  const subtotal = useMemo(
+    () => cart.reduce((sum, item) => sum + Number(item.price) * Number(item.quantity), 0),
     [cart]
-  )
+  );
+  const totalItems = useMemo(
+    () => cart.reduce((sum, item) => sum + item.quantity, 0),
+    [cart]
+  );
 
-  if (!mounted) {
-    return (
-      <div className="w-full rounded-lg bg-gray-100 h-12 animate-pulse" aria-hidden />
-    )
-  }
+  if (!mounted || cart.length === 0) return null;
 
   return (
     <PayPalButtons
-      style={{ layout: "vertical", shape: "rect", color: "gold", label: "paypal" }}
-      createOrder={async (_data, actions) => {
-        return actions.order.create({
+      style={{
+        layout: "horizontal",
+        color: "gold",
+        label: "checkout",
+        shape: "rect",
+        height: 45,
+        tagline: false
+      }}
+      createOrder={(_data, actions) =>
+        actions.order.create({
           intent: "CAPTURE",
           purchase_units: [
             {
               amount: {
                 currency_code: "GBP",
-                value: Number(total).toFixed(2),
-                breakdown: {
-                  item_total: { currency_code: "GBP", value: Number(total).toFixed(2) },
-                },
-              },
-              items, // optional, for better receipts
-            },
+                value: subtotal.toFixed(2)
+              }
+            }
           ],
+          application_context: {
+            shipping_preference: "GET_FROM_FILE"
+          }
         })
-      }}
+      }
       onApprove={async (_data, actions) => {
-        const details = await actions.order?.capture()
-        // You can inspect `details` and store order info if needed
-        alert("Payment completed! Thank you for your order 🙌")
-        clearCart()
+        if (!actions.order) return;
+        const details = await actions.order.capture();
+        alert(`Transaction completed by ${details.payer?.name?.given_name || "customer"}`);
+        clearCart();
       }}
       onError={(err) => {
-        console.error("PayPal error", err)
-        alert("Sorry, PayPal checkout failed. Please try again.")
+        console.error("PayPal error:", err);
+        alert("Sorry, PayPal checkout failed. Please try again.");
       }}
-      disabled={cart.length === 0 || total <= 0}
-      forceReRender={[Number(total).toFixed(2), cart.length]}
+      // re-render when totals change
+      forceReRender={[subtotal.toFixed(2), String(totalItems)]}
     />
-  )
+  );
 }
