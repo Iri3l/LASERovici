@@ -1,0 +1,67 @@
+# .github/workflows/LASERovici-orchestration.yml
+name: Orchestration
+
+on:
+  push:
+    branches: [ "docs-foundation" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Set Outputs
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+      notes: ${{ steps.meta.outputs.notes }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # Collect metadata and expose as STRING outputs
+      - name: Set job outputs (version, notes)
+        id: meta
+        shell: bash
+        run: |
+          # version from package.json (fallback to tag name if needed)
+          VERSION="$(node -e 'try{console.log(require("./package.json").version)}catch(e){console.log("")}')"
+          if [ -z "$VERSION" ]; then
+            VERSION="${GITHUB_REF_NAME}"
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+          # Multiline notes as a plain string (no JSON!)
+          {
+            echo 'notes<<__EOF__'
+            echo 'v1.2 – UX & checkout hardening'
+            echo '- Lightbox gallery, See more/less'
+            echo '- Fixed/sticky header with safe-area'
+            echo '- T&C checkbox gate before PayPal'
+            echo '- Cart persists across refresh'
+            echo '__EOF__'
+          } >> "$GITHUB_OUTPUT"
+
+  # Example of consuming those outputs in a follow-up job
+  after:
+    name: Use Outputs
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Show outputs
+        run: |
+          echo "Version: ${{ needs.build.outputs.version }}"
+          echo "Notes:"
+          echo "${{ needs.build.outputs.notes }}"
