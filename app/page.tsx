@@ -1,6 +1,7 @@
 // app/page.tsx
 import type { Metadata } from "next";
 import HomeClient from "./components/HomeClient";
+import InstallButton from "./components/InstallButton";
 
 export const metadata: Metadata = {
   title: "Custom Laser Engraving in the UK | LASERovici Engraving",
@@ -27,5 +28,10 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <HomeClient />;
+  return (
+    <>
+      <InstallButton />
+      <HomeClient />
+    </>
+  );
 }

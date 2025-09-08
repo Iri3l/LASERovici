@@ -1,5 +1,23 @@
 # LASERovici Engraving – Project Notes
 
+## Progressive Web App (PWA) Support (2025-09-08)
+
+- Added `manifest.webmanifest` in `/public` with icons.
+- Added minimal service worker `/public/sw.js` for installability.
+- Created `app/components/PWAProvider.tsx` to register service worker.
+- Created `app/components/InstallButton.tsx`:
+  - Shows **Install App** button on Android/Chromium when `beforeinstallprompt` fires.
+  - On iOS, shows instruction bubble: “Share → Add to Home Screen”.
+  - Hidden once installed or running in standalone mode.
+- Updated `app/layout.tsx`:
+  - Linked manifest, theme color, iOS meta tags.
+  - Injected `<PWAProvider />` so SW registers globally.
+- Updated `app/page.tsx`:
+  - Cleaned duplicate `export default`.
+  - Added `<InstallButton />` above `<HomeClient />`.
+
+⚠️ Note: On macOS desktop you usually won’t see the install button; that’s expected.
+
 ## ✅ Current Working State (2025‑08‑24)
 - **Header**
   - Fixed on mobile, sticky on desktop; gradient preserved.

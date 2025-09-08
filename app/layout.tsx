@@ -1,39 +1,56 @@
 // app/layout.tsx
-import "./globals.css"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import Header from "./components/Header"
-import Footer from "./components/Footer"
-import Providers from "./components/Providers" // keeps PayPal + any other providers
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Providers from "./components/Providers";
+import PWAProvider from "./components/PWAProvider";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "LASERovici Engraving",
-  description: "Custom laser-engraved gifts and accessories — precision-crafted in the UK.",
-  // Use your JPG as the favicon (works fine)
+  description:
+    "Custom laser-engraved gifts and accessories — precision-crafted in the UK.",
   icons: {
     icon: "/logo.jpg",
     shortcut: "/logo.jpg",
     apple: "/logo.jpg",
   },
-  // (Optional) Nice sharing cards if you already set them elsewhere, you can remove this block
   openGraph: {
     type: "website",
     url: "https://shop.lazarovici.co.uk/",
     siteName: "LASERovici Engraving",
     title: "LASERovici Engraving",
-    description: "Custom laser-engraved gifts and accessories — precision-crafted in the UK.",
+    description:
+      "Custom laser-engraved gifts and accessories — precision-crafted in the UK.",
   },
-}
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body>
+      <head>
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <meta name="theme-color" content="#111827" />
+        {/* iOS PWA support */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+      </head>
+      <body className={inter.className}>
+        <PWAProvider />
         <Providers>
           <Header />
-          {/* Reserve header height ONLY on mobile (h-16 ≈ 64px) */}
+          {/* Reserve header height on mobile (≈64px) */}
           <div className="h-[calc(4rem+env(safe-area-inset-top))] md:h-0" />
           {children}
           <Footer />

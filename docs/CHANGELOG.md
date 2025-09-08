@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+
+### Added (2025-09-08)
+- Progressive Web App (PWA) support:
+  - Web app manifest with icons.
+  - Service worker registration via `PWAProvider`.
+  - Install button with iOS/Android-specific behaviour.
+
+### Changed
+- Cleaned `app/page.tsx` to fix duplicate default export error.
+- Updated `app/layout.tsx` with manifest link, theme color, and PWA meta tags.
+
 ## [v1.2] – UX & Checkout Hardening (2025‑08‑24)
 ### Added
 - **Lightbox gallery** for product images with arrows + pinch/scroll zoom (mobile‑friendly).
