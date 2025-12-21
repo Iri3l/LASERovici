@@ -67,7 +67,7 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
     id: 5,
     name: "Personalised knives",
     price: 30.00,
-    images: ["/images/kitchen1.jpg", "/images/kitchen2.jpg"],
+    images: ["/images/kit1.JPG", "/images/kit2.JPG"],
     description:
       "Elegant, engraved and ready to gift, these knives are the perfect personalized present for anyone who loves to cook. The fine engraving on the blade adds a unique, custom touch, transforming a practical tool into a meaningful keepsake that can be cherished and used every day.",
     favorites: 0,
