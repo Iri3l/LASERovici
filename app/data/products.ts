@@ -81,4 +81,13 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
       "Eco-friendly bamboo board with your design. Kitchen-safe with a beautiful natural grain.",
     favorites: 0,
   },
+  // Template pentru produse noi - înlocuiește cu detaliile produsului tău
+  // {
+  //   id: 7,
+  //   name: "Numele produsului",
+  //   price: 0.0,
+  //   images: ["/images/nume-imagine.jpg"],
+  //   description: "Descrierea produsului aici...",
+  //   favorites: 0,
+  // },
 ];
