@@ -65,11 +65,11 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
   },
   {
     id: 5,
-    name: "Custom Glass Mug",
-    price: 12.49,
-    images: ["/images/mug-front.jpg", "/images/mug-back.jpg"],
+    name: "Personalised knives",
+    price: 30.00,
+    images: ["/images/kitchen1.jpg", "/images/kitchen2.jpg"],
     description:
-      "Elegant glass mug engraved with your design. Dishwasher safe and perfect for daily use.",
+      "Elegant, engraved and ready to gift, these knives are the perfect personalized present for anyone who loves to cook. The fine engraving on the blade adds a unique, custom touch, transforming a practical tool into a meaningful keepsake that can be cherished and used every day.",
     favorites: 0,
   },
   {
