@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.3] – IONOS Deployment Fix & Product Template (2025‑12‑21)
+### Added
+- **Product template** in `app/data/products.ts` for easy addition of new products.
+- **Apache `.htaccess` configuration** for proper static file serving on IONOS:
+  - Directory index configuration for `index.html`.
+  - Client-side routing support (redirects to `index.html` for non-existent files).
+  - MIME type configuration for JavaScript, CSS, SVG, and JSON files.
+  - Compression and caching headers for better performance.
+  - Security headers (X-Content-Type-Options, X-Frame-Options, X-XSS-Protection).
+- **New product**: "Customised Pandative" (Dog Tag Necklace with Viking Fehu Rune).
+
+### Fixed
+- **IONOS deployment workflow**: Changed `DEPLOYMENT_FOLDER` from `public` to `out` in `.github/workflows/LASERovici-build.yaml`.
+  - Next.js static export generates HTML files in `out/` folder, not `public/`.
+  - This fix ensures all generated HTML files (`index.html`, `basket.html`, etc.) are properly deployed.
+- **403 Forbidden error** on IONOS deployment resolved by:
+  - Correct deployment folder configuration.
+  - Apache `.htaccess` file for proper file serving and routing.
+
+### Changed
+- Updated GitHub Actions workflow to use correct deployment folder.
+- Merged remote workflow changes with local `.htaccess` addition.
+
+---
 
 ### Added (2025-09-08)
 - Progressive Web App (PWA) support:
