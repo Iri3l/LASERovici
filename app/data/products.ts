@@ -74,11 +74,12 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
   },
   {
     id: 6,
-    name: "Laser-Engraved Bamboo Board",
-    price: 24.99,
-    images: ["/images/board-front.jpg", "/images/board-back.jpg"],
+    name: "Customised Pandative",
+    price: 15.00,
+    images: ["/images/pen1.JPG"],
     description:
-      "Eco-friendly bamboo board with your design. Kitchen-safe with a beautiful natural grain.",
+      "Dog Tag Necklace with Viking Fehu Rune – Luck and Prosperity
+This is a stylish metal dog tag necklace with rounded corners and a dark, slightly shiny finish. The centre is engraved with the Fehu Viking rune, a symbol of luck, prosperity, and successful new beginnings. The sturdy chain makes it suitable for everyday wear and gives it a modern, unisex look.",
     favorites: 0,
   },
   // Template pentru produse noi - înlocuiește cu detaliile produsului tău
