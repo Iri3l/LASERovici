@@ -18,7 +18,7 @@ export const products: Product[] = [
     id: 1,
     name: "Engraved Aluminium Business Card (Ask for Bulk Orders)",
     price: 3.4,
-    images: ["/images/businessCard.jpg"],
+    images: ["/images/businessCard.JPG"],
     description: `Introducing our exquisite 0.2mm aluminium business cards, the perfect blend of durability and elegance! Crafted from high-quality aluminium, these cards are not only lightweight but also incredibly strong, making them a lasting impression in the world of networking.
 Each card is precision-engraved with your unique design, ensuring that your brand stands out with a modern and professional aesthetic. The sleek metallic finish adds a touch of sophistication, while the matte or brushed options give a contemporary feel that’s sure to catch the eye.
 Ideal for entrepreneurs, creatives, and professionals alike, these business cards are perfect for making a memorable statement at meetings, conferences, or networking events. With their resistance to wear and tear, they’ll maintain their pristine appearance, representing your brand effectively over time.
@@ -29,7 +29,7 @@ Upgrade your networking game with our aluminium business cards and leave a lasti
     id: 2,
     name: "Dog Tag Stainless Steel",
     price: 6.5,
-    images: ["/images/dogTagFront.jpg", "/images/dogTagBack.jpg"],
+    images: ["/images/dogTagFront.JPG", "/images/dogTagBack.JPG"],
     description: `Introducing our premium laser-engraved stainless steel dog tags, designed to provide both style and security for your beloved pet! Crafted from high-quality stainless steel, these tags are not only durable and resistant to wear, but they also feature a sleek, polished finish that catches the eye.
 Each tag is expertly engraved with your pet’s name and your contact information, ensuring that they can always find their way back home. The precision laser engraving guarantees clear visibility, so important details are easy to read. Plus, the smooth edges ensure comfort for your furry friend, making it the perfect accessory for everyday wear.
 Available in various shapes and sizes, our dog tags can be customised to match your pet’s personality. Whether you prefer a classic round tag or a trendy bone shape, we’ve got you covered. With our stainless steel dog tags, you can rest assured knowing that your pet is not only stylish but also safe.
@@ -40,7 +40,7 @@ Give your pet the gift of security with our laser-engraved stainless steel dog t
     id: 3,
     name: "Selfie :-)",
     price: 5.0,
-    images: ["/images/selfie.jpg"],
+    images: ["/images/selfie.JPG"],
     description: `Introducing our stunning 0.2mm thick aluminium cards, perfect for showcasing your cherished memories! These lightweight yet durable cards are designed for engraving high-quality images, allowing you to immortalise your favourite moments in style.
 Each card features a sleek surface ideal for detailed engraving, making it easy to customise with your chosen pictures. Once engraved, you can display your cards in a stylish frame or simply place them on a shelf, creating a unique and personal touch to any space.
 Whether you’re looking to celebrate special occasions, commemorate milestones, or simply decorate your home, these aluminium cards offer a modern and elegant way to display your memories. Their minimalist design complements any decor, making them perfect gifts for loved ones or a delightful addition to your own collection.
