@@ -18,7 +18,7 @@ export const products: Product[] = [
     id: 1,
     name: "Engraved Aluminium Business Card (Ask for Bulk Orders)",
     price: 3.4,
-    images: ["/images/businessCard.JPG"],
+    images: ["/images/businessCard.JPG", "/images/buss.JPG"],
     description: `Introducing our exquisite 0.2mm aluminium business cards, the perfect blend of durability and elegance! Crafted from high-quality aluminium, these cards are not only lightweight but also incredibly strong, making them a lasting impression in the world of networking.
 Each card is precision-engraved with your unique design, ensuring that your brand stands out with a modern and professional aesthetic. The sleek metallic finish adds a touch of sophistication, while the matte or brushed options give a contemporary feel that’s sure to catch the eye.
 Ideal for entrepreneurs, creatives, and professionals alike, these business cards are perfect for making a memorable statement at meetings, conferences, or networking events. With their resistance to wear and tear, they’ll maintain their pristine appearance, representing your brand effectively over time.
@@ -40,7 +40,7 @@ Give your pet the gift of security with our laser-engraved stainless steel dog t
     id: 3,
     name: "Selfie :-)",
     price: 5.0,
-    images: ["/images/selfie.JPG"],
+    images: ["/images/selfie.JPG", "/images/pend1.JPG"],
     description: `Introducing our stunning 0.2mm thick aluminium cards, perfect for showcasing your cherished memories! These lightweight yet durable cards are designed for engraving high-quality images, allowing you to immortalise your favourite moments in style.
 Each card features a sleek surface ideal for detailed engraving, making it easy to customise with your chosen pictures. Once engraved, you can display your cards in a stylish frame or simply place them on a shelf, creating a unique and personal touch to any space.
 Whether you’re looking to celebrate special occasions, commemorate milestones, or simply decorate your home, these aluminium cards offer a modern and elegant way to display your memories. Their minimalist design complements any decor, making them perfect gifts for loved ones or a delightful addition to your own collection.
@@ -76,7 +76,7 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
     id: 6,
     name: "Customised Pandative",
     price: 15.00,
-    images: ["/images/pen1.JPG"],
+    images: ["/images/pen1.JPG", "/images/pend1.JPG", "/images/pend.JPG", "/images/pend2.JPG"],
     description: `Dog Tag Necklace with Viking Fehu Rune – Luck and Prosperity
 This is a stylish metal dog tag necklace with rounded corners and a dark, slightly shiny finish. The centre is engraved with the Fehu Viking rune, a symbol of luck, prosperity, and successful new beginnings. The sturdy chain makes it suitable for everyday wear and gives it a modern, unisex look.`,
     favorites: 0,
