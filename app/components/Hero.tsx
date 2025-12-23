@@ -5,17 +5,18 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-6 py-20 text-center">
         {/* Headline */}
         <h1 className="text-4xl md:text-5xl font-extrabold">
-          Premium Laser Engraving in the UK
+          Laser Engraving
         </h1>
         <p className="mt-3 text-white/90 max-w-2xl mx-auto">
-          Custom gifts and personalized items in wood, metal, leather, glass, and more.
-          Precision engraving. Fast turnaround. Small-batch friendly.
+        Custom gifts and personalized items in wood, metal, leather, glass, and more. 
+        High-precision engraving. Fast turnaround. Small-batch friendly. Signs for doors, floors, tables, street names, and more.
+        Get in touch for your custom design and object/material to be engraved.
         </p>
 
         {/* Badges */}
         <div className="mt-6 flex flex-wrap gap-3 justify-center text-sm">
           <span className="px-3 py-1 rounded-full bg-white/15 border border-white/20">
-            Wood · Metal · Leather · Glass · Plastic
+            Wood · Metal · Leather · Glass · Plastic · Acrylics 
           </span>
           <span className="px-3 py-1 rounded-full bg-white/15 border border-white/20">
             Made in the UK
