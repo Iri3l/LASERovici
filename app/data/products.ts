@@ -77,8 +77,7 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
     name: "Customised Pandative",
     price: 15.00,
     images: ["/images/pen1.JPG", "/images/pend1.JPG", "/images/pend.JPG", "/images/pend2.JPG"],
-    description: `Dog Tag Necklace with Viking Fehu Rune – Luck and Prosperity
-This is a stylish metal dog tag necklace with rounded corners and a dark, slightly shiny finish. The centre is engraved with the Fehu Viking rune, a symbol of luck, prosperity, and successful new beginnings. The sturdy chain makes it suitable for everyday wear and gives it a modern, unisex look.`,
+    description: "Create a unique and meaningful gift with our personalized laser-engraved pendants. Each pendant is custom-made with your photo, symbol, or text, carefully engraved with high-precision laser technology for a sharp and lasting finish. Perfect as a gift for loved ones, anniversaries, birthdays, memorials, or special occasions, these pendants turn your favourite memories and messages into a beautiful piece of jewellery you can wear every day",
     favorites: 0,
   },
   // Template pentru produse noi - înlocuiește cu detaliile produsului tău
