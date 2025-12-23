@@ -76,7 +76,7 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
     id: 6,
     name: "Customised Pandative",
     price: 15.00,
-    images: ["/images/pen1.JPG", "/images/pend1.JPG", "/images/pend.JPG", "/images/pend2.JPG"],
+    images: ["/images/pen1.JPG", "/images/pend1.JPG", "/images/pend.JPG"],
     description: "Create a unique and meaningful gift with our personalized laser-engraved pendants. Each pendant is custom-made with your photo, symbol, or text, carefully engraved with high-precision laser technology for a sharp and lasting finish. Perfect as a gift for loved ones, anniversaries, birthdays, memorials, or special occasions, these pendants turn your favourite memories and messages into a beautiful piece of jewellery you can wear every day",
     favorites: 0,
   },
