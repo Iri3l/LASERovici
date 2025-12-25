@@ -17,7 +17,7 @@ export const products: Product[] = [
   {
     id: 1,
     name: "Engraved Aluminium Business Card (Ask for Bulk Orders)",
-    price: 3.4,
+    price: 3.00,
     images: ["/images/businessCard.JPG", "/images/buss.JPG"],
     description: `Introducing our exquisite 0.2mm aluminium business cards, the perfect blend of durability and elegance! Crafted from high-quality aluminium, these cards are not only lightweight but also incredibly strong, making them a lasting impression in the world of networking.
 Each card is precision-engraved with your unique design, ensuring that your brand stands out with a modern and professional aesthetic. The sleek metallic finish adds a touch of sophistication, while the matte or brushed options give a contemporary feel that’s sure to catch the eye.
@@ -28,7 +28,7 @@ Upgrade your networking game with our aluminium business cards and leave a lasti
   {
     id: 2,
     name: "Dog Tag Stainless Steel",
-    price: 6.5,
+    price: 5.00,
     images: ["/images/dogTagFront.JPG", "/images/dogTagBack.JPG"],
     description: `Introducing our premium laser-engraved stainless steel dog tags, designed to provide both style and security for your beloved pet! Crafted from high-quality stainless steel, these tags are not only durable and resistant to wear, but they also feature a sleek, polished finish that catches the eye.
 Each tag is expertly engraved with your pet’s name and your contact information, ensuring that they can always find their way back home. The precision laser engraving guarantees clear visibility, so important details are easy to read. Plus, the smooth edges ensure comfort for your furry friend, making it the perfect accessory for everyday wear.
@@ -39,7 +39,7 @@ Give your pet the gift of security with our laser-engraved stainless steel dog t
   {
     id: 3,
     name: "Selfie :-)",
-    price: 5.0,
+    price: 4.0,
     images: ["/images/selfie.JPG", "/images/pend1.JPG"],
     description: `Introducing our stunning 0.2mm thick aluminium cards, perfect for showcasing your cherished memories! These lightweight yet durable cards are designed for engraving high-quality images, allowing you to immortalise your favourite moments in style.
 Each card features a sleek surface ideal for detailed engraving, making it easy to customise with your chosen pictures. Once engraved, you can display your cards in a stylish frame or simply place them on a shelf, creating a unique and personal touch to any space.
@@ -65,7 +65,7 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
   },
   {
     id: 5,
-    name: "Personalised knives",
+    name: "Personalised knives (not in stock, order yours today)",
     price: 30.00,
     images: ["/images/kit1.JPG", "/images/kit2.JPG"],
     description:
@@ -74,8 +74,8 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
   },
   {
     id: 6,
-    name: "Customised Pandative",
-    price: 15.00,
+    name: "Customised Pandative (low stock)",
+    price: 8.00,
     images: ["/images/pen1.JPG", "/images/pend1.JPG", "/images/pend.JPG"],
     description: "Create a unique and meaningful gift with our personalized laser-engraved pendants. Each pendant is custom-made with your photo, symbol, or text, carefully engraved with high-precision laser technology for a sharp and lasting finish. Perfect as a gift for loved ones, anniversaries, birthdays, memorials, or special occasions, these pendants turn your favourite memories and messages into a beautiful piece of jewellery you can wear every day",
     favorites: 0,
