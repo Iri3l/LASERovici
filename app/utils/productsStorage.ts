@@ -22,6 +22,8 @@ export function getProducts(): Product[] {
     console.error('Error reading products from localStorage:', error);
   }
 
+  // Always return default products from products.ts
+  // localStorage is only for temporary admin panel changes
   return defaultProducts;
 }
 
