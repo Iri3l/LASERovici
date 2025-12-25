@@ -33,18 +33,19 @@ jobs:
       
       - name: Parse project info
         id: parse
+        continue-on-error: true
         run: |
           INFO='${{ steps.project.outputs.info }}'
-          if [ -z "$INFO" ] || [ "$INFO" = "null" ] || [ "$INFO" = "" ]; then
+          if [ -z "$INFO" ] || [ "$INFO" = "null" ] || [ "$INFO" = "" ] || [ "$INFO" = "{}" ]; then
             echo "deployment-enabled=false" >> $GITHUB_OUTPUT
             echo "branch-id=" >> $GITHUB_OUTPUT
-          else
-            # Try to parse JSON, fallback to false if it fails
-            DEPLOYMENT_ENABLED=$(echo "$INFO" | jq -r '.["deployment-enabled"] // "false"' 2>/dev/null || echo "false")
-            BRANCH_ID=$(echo "$INFO" | jq -r '.["branch-id"] // ""' 2>/dev/null || echo "")
-            echo "deployment-enabled=$DEPLOYMENT_ENABLED" >> $GITHUB_OUTPUT
-            echo "branch-id=$BRANCH_ID" >> $GITHUB_OUTPUT
+            exit 0
           fi
+          # Try to parse JSON, fallback to false if it fails
+          DEPLOYMENT_ENABLED=$(echo "$INFO" | jq -r '.["deployment-enabled"] // "false"' 2>/dev/null || echo "false")
+          BRANCH_ID=$(echo "$INFO" | jq -r '.["branch-id"] // ""' 2>/dev/null || echo "")
+          echo "deployment-enabled=$DEPLOYMENT_ENABLED" >> $GITHUB_OUTPUT
+          echo "branch-id=$BRANCH_ID" >> $GITHUB_OUTPUT
 
 
   build:
