@@ -92,3 +92,4 @@ export default function ImageUploader({ onImageUploaded, productId }: ImageUploa
   );
 }
 
+

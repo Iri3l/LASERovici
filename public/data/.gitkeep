@@ -1,0 +1,4 @@
+# This directory is for products.json file
+# Export products from admin panel and place the JSON file here
+# The site will automatically load products from this file if it exists
+

@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.0.1] – JSON Export/Import for Template Users (2025‑12‑21)
+### Added
+- **JSON Export/Import System** - Makes template suitable for non-coders:
+  - **Export JSON** button: Downloads `products.json` file with all products
+  - **Import JSON** button: Uploads and applies products from JSON file
+  - Automatic loading from `/public/data/products.json` if file exists
+  - Priority order: JSON file → localStorage → default products
+- **Template User Instructions**: Clear guidance in admin panel for non-technical users
+- **Product Validation**: Import validates JSON structure before applying
+
+### Changed
+- **HomeClient**: Now checks for `/data/products.json` first, then localStorage, then defaults
+- **Admin Dashboard**: Added Export/Import buttons with user-friendly instructions
+- **Product Storage**: Enhanced with file-based export/import capabilities
+
+### Technical Details
+- Export creates downloadable JSON file compatible with static sites
+- Import validates product structure before applying changes
+- JSON file in `/public/data/` takes priority over localStorage
+- Perfect for template distribution - users can manage products without coding
+
+### Template Distribution
+- Non-coders can now:
+  1. Export products to JSON
+  2. Place file in `/public/data/` folder
+  3. Commit to repository
+  4. Changes are permanent and visible on live site
+
+---
+
 ## [v2.0] – Admin Panel & Product Management (2025‑12‑21)
 ### Added
 - **Admin Panel** (`/admin`) - Complete product management interface:

@@ -100,3 +100,4 @@ Since this site uses static export (`output: 'export'`), the admin panel:
 - Bulk operations
 - Product categories/tags
 
+

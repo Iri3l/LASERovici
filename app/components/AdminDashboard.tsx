@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react';
 import { Product } from '../data/products';
 import { products as initialProducts } from '../data/products';
 import ImageUploader from './ImageUploader';
-import { saveProducts, getProducts } from '../utils/productsStorage';
+import { saveProducts, getProducts, exportProductsToJSON, importProductsFromJSON } from '../utils/productsStorage';
 
 export default function AdminDashboard() {
   const [products, setProducts] = useState<Product[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [generatedCode, setGeneratedCode] = useState('');
+  const [importError, setImportError] = useState<string | null>(null);
 
   useEffect(() => {
     // Load from localStorage if available, otherwise use default
@@ -70,6 +71,35 @@ export default function AdminDashboard() {
     ));
   };
 
+  const handleExportJSON = () => {
+    try {
+      exportProductsToJSON(products);
+      alert('Products exported to products.json! Place this file in /public/data/ folder and commit to make changes permanent.');
+    } catch (error) {
+      alert('Error exporting products: ' + (error instanceof Error ? error.message : 'Unknown error'));
+    }
+  };
+
+  const handleImportJSON = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setImportError(null);
+    try {
+      const importedProducts = await importProductsFromJSON(file);
+      setProducts(importedProducts);
+      saveProducts(importedProducts);
+      alert(`Successfully imported ${importedProducts.length} products!`);
+      // Reset file input
+      e.target.value = '';
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      setImportError(errorMessage);
+      alert('Error importing products: ' + errorMessage);
+      e.target.value = '';
+    }
+  };
+
   const generateProductsCode = () => {
     const code = `// app/data/products.ts
 
@@ -102,30 +132,56 @@ ${products.map(p => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-gray-900">Products Management</h2>
-        <div className="flex gap-3">
-          <button
-            onClick={() => {
-              saveProducts(products);
-              alert('All changes saved! They will be visible on the main site after you logout.');
-            }}
-            className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold"
-          >
-            💾 Save All Changes
-          </button>
-          <button
-            onClick={generateProductsCode}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-          >
-            Generate Code
-          </button>
-          <button
-            onClick={handleAddProduct}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-          >
-            Add Product
-          </button>
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-gray-900">Products Management</h2>
+          <div className="flex gap-3 flex-wrap">
+            <button
+              onClick={() => {
+                saveProducts(products);
+                alert('All changes saved to localStorage! They will be visible on the main site.');
+              }}
+              className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold"
+            >
+              💾 Save All Changes
+            </button>
+            <button
+              onClick={handleExportJSON}
+              className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
+              title="Export products to JSON file for permanent storage"
+            >
+              📥 Export JSON
+            </button>
+            <label className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition cursor-pointer">
+              📤 Import JSON
+              <input
+                type="file"
+                accept=".json"
+                onChange={handleImportJSON}
+                className="hidden"
+              />
+            </label>
+            <button
+              onClick={generateProductsCode}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+            >
+              Generate Code
+            </button>
+            <button
+              onClick={handleAddProduct}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Add Product
+            </button>
+          </div>
+        </div>
+        {importError && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+            Import Error: {importError}
+          </div>
+        )}
+        <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg text-sm">
+          <strong>💡 Template Users:</strong> Use "Export JSON" to download products.json, place it in <code className="bg-blue-100 px-1 rounded">/public/data/</code> folder, then commit. This makes changes permanent without coding!
         </div>
       </div>
 

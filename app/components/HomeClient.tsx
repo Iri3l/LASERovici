@@ -7,7 +7,7 @@ import { useState, useEffect } from "react"
 import Hero from "../components/Hero"
 import { products as defaultProducts, Product } from "../data/products"
 import { useCart } from "../context/CartContext"
-import { getProducts } from "../utils/productsStorage"
+import { getProducts, loadProductsFromJSON } from "../utils/productsStorage"
 
 // Lightbox (regular imports — plugins aren’t React components)
 import Lightbox from "yet-another-react-lightbox"
@@ -143,10 +143,22 @@ export default function HomeClient() {
   const { addToCart } = useCart()
   const [products, setProducts] = useState<Product[]>(defaultProducts)
 
-  // Load products from localStorage if available (admin changes)
+  // Load products: try JSON file first, then localStorage, then defaults
   useEffect(() => {
-    const savedProducts = getProducts();
-    setProducts(savedProducts);
+    const loadProducts = async () => {
+      // Try to load from /data/products.json (for template users)
+      const jsonProducts = await loadProductsFromJSON();
+      if (jsonProducts) {
+        setProducts(jsonProducts);
+        return;
+      }
+
+      // Fallback to localStorage (admin changes)
+      const savedProducts = getProducts();
+      setProducts(savedProducts);
+    };
+
+    loadProducts();
   }, []);
 
   // JSON-LD (Organization + WebSite)
