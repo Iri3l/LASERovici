@@ -3,10 +3,11 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Script from "next/script"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Hero from "../components/Hero"
-import { products, Product } from "../data/products"
+import { products as defaultProducts, Product } from "../data/products"
 import { useCart } from "../context/CartContext"
+import { getProducts } from "../utils/productsStorage"
 
 // Lightbox (regular imports — plugins aren’t React components)
 import Lightbox from "yet-another-react-lightbox"
@@ -140,6 +141,13 @@ function ProductCard({
 /* --- HomeClient --- */
 export default function HomeClient() {
   const { addToCart } = useCart()
+  const [products, setProducts] = useState<Product[]>(defaultProducts)
+
+  // Load products from localStorage if available (admin changes)
+  useEffect(() => {
+    const savedProducts = getProducts();
+    setProducts(savedProducts);
+  }, []);
 
   // JSON-LD (Organization + WebSite)
   const jsonLd = {

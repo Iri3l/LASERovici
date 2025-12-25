@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.0] – Admin Panel & Product Management (2025‑12‑21)
+### Added
+- **Admin Panel** (`/admin`) - Complete product management interface:
+  - Secure password-protected login system with hashed authentication
+  - Product CRUD operations (Create, Read, Update, Delete)
+  - Image management for products (add/remove images)
+  - Real-time product editing with live preview
+  - "Save All Changes" button to persist modifications
+  - Code generator for TypeScript product definitions
+  - Image upload helper with path generation
+- **Product Storage System** (`app/utils/productsStorage.ts`):
+  - localStorage-based product persistence
+  - Automatic loading of saved products on site load
+  - Seamless fallback to default products if no saved data exists
+- **Authentication System** (`app/utils/auth.ts`):
+  - Secure password verification using SHA-256 hashing
+  - Password never stored in plain text
+  - Client-side compatible authentication
+- **Admin Layout** - Separate layout for admin pages (no header/footer)
+- **Documentation**:
+  - `docs/ADMIN_PANEL.md` - Complete admin panel documentation
+  - `docs/PROJECT_CONTEXT.md` - Project reference guide
+
+### Changed
+- **HomeClient Component**: Now loads products from localStorage if available (admin changes)
+- **Product Management**: All product modifications persist across sessions
+- **Security**: Admin password is hashed and never appears in codebase
+
+### Technical Details
+- Admin panel works entirely client-side (compatible with static export)
+- Product changes saved to localStorage for immediate effect
+- Code generator creates TypeScript-ready product definitions
+- Image paths validated and normalized (uppercase .JPG extension)
+
+---
+
 ## [v1.3] – IONOS Deployment Fix & Product Template (2025‑12‑21)
 ### Added
 - **Product template** in `app/data/products.ts` for easy addition of new products.
