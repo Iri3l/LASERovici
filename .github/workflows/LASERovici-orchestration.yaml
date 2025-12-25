@@ -7,16 +7,20 @@ name: "Deploy Now: Orchestration"
 run-name: "Deploy Now: Build LASERovici · ${{ github.event.head_commit.message || format('Triggered by {0}', github.triggering_actor) }}"
 
 on:
-  - push
-  - workflow_dispatch
+  push:
+    branches:
+      - '**'  # Run on all branches
+    tags-ignore:
+      - '**'  # Ignore all tags (IONOS Deploy Now works with branches only)
+  workflow_dispatch:
 
 jobs:
   retrieve-project:
     name: check readiness
     runs-on: ubuntu-latest
     outputs:
-      deployment-enabled: ${{ fromJson(steps.project.outputs.info).deployment-enabled }}
-      branch-id: ${{ fromJson(steps.project.outputs.info).branch-id }}
+      deployment-enabled: ${{ steps.parse.outputs.deployment-enabled }}
+      branch-id: ${{ steps.parse.outputs.branch-id }}
     steps:
       - name: Fetch project data
         uses: ionos-deploy-now/project-action@v1
@@ -26,6 +30,21 @@ jobs:
           service-host: api-eu.ionos.space
           project-id: 1d4290bb-1634-4dd1-9de6-8a5e55b910ba
           action: retrieve-info
+      
+      - name: Parse project info
+        id: parse
+        run: |
+          INFO='${{ steps.project.outputs.info }}'
+          if [ -z "$INFO" ] || [ "$INFO" = "null" ] || [ "$INFO" = "" ]; then
+            echo "deployment-enabled=false" >> $GITHUB_OUTPUT
+            echo "branch-id=" >> $GITHUB_OUTPUT
+          else
+            # Try to parse JSON, fallback to false if it fails
+            DEPLOYMENT_ENABLED=$(echo "$INFO" | jq -r '.["deployment-enabled"] // "false"' 2>/dev/null || echo "false")
+            BRANCH_ID=$(echo "$INFO" | jq -r '.["branch-id"] // ""' 2>/dev/null || echo "")
+            echo "deployment-enabled=$DEPLOYMENT_ENABLED" >> $GITHUB_OUTPUT
+            echo "branch-id=$BRANCH_ID" >> $GITHUB_OUTPUT
+          fi
 
 
   build:
