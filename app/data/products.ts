@@ -86,16 +86,17 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
     name: "Cat 🐈 Pendant",
      price: 4.0,
      images: ["/images/cat1.JPG", "/images/cat2.JPG"],
-     description: "Great gift idea for:
+     description: `Great gift idea for:
        • Friends and family who adore their cats
        • Pet parents who want a keepsake to remind them of their furry friend
        • Anyone who loves minimalist, meaningful jewelry
+       
        Add a touch of feline charm to your daily look or surprise a cat lover with a special, custom-engraved pendant they’ll treasure.
      You can customize this pendant – contact me if you’d like a different cat design, name, or a special message added!
      Celebrate your love for cats with this elegant laser-engraved aluminum pendant. 
      Lightweight yet durable, this piece is perfect for everyday wear and makes a thoughtful gift for any cat lover.
      Each pendant features a finely detailed cat design, permanently engraved with laser precision onto high-quality aluminum.
-     The result is a clean, modern look that won’t fade, peel, or wash off.",
+     The result is a clean, modern look that won’t fade, peel, or wash off.`,
      favorites: 0,
    },
 ];
