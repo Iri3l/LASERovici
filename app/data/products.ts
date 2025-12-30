@@ -80,13 +80,22 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
     description: "Create a unique and meaningful gift with our personalized laser-engraved pendants. Each pendant is custom-made with your photo, symbol, or text, carefully engraved with high-precision laser technology for a sharp and lasting finish. Perfect as a gift for loved ones, anniversaries, birthdays, memorials, or special occasions, these pendants turn your favourite memories and messages into a beautiful piece of jewellery you can wear every day",
     favorites: 0,
   },
-  // Template pentru produse noi - înlocuiește cu detaliile produsului tău
-  // {
-  //   id: 7,
-  //   name: "Numele produsului",
-  //   price: 0.0,
-  //   images: ["/images/nume-imagine.jpg"],
-  //   description: "Descrierea produsului aici...",
-  //   favorites: 0,
-  // },
+  
+   {
+     id: 7,
+    name: "Cat 🐈 Pendant",
+     price: 4.0,
+     images: ["/images/cat1.JPG", "/images/cat2.JPG"],
+     description: "Great gift idea for:
+       • Friends and family who adore their cats
+       • Pet parents who want a keepsake to remind them of their furry friend
+       • Anyone who loves minimalist, meaningful jewelry
+       Add a touch of feline charm to your daily look or surprise a cat lover with a special, custom-engraved pendant they’ll treasure.
+     You can customize this pendant – contact me if you’d like a different cat design, name, or a special message added!
+     Celebrate your love for cats with this elegant laser-engraved aluminum pendant. 
+     Lightweight yet durable, this piece is perfect for everyday wear and makes a thoughtful gift for any cat lover.
+     Each pendant features a finely detailed cat design, permanently engraved with laser precision onto high-quality aluminum.
+     The result is a clean, modern look that won’t fade, peel, or wash off.",
+     favorites: 0,
+   },
 ];
