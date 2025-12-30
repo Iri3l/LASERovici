@@ -40,7 +40,7 @@ Give your pet the gift of security with our laser-engraved stainless steel dog t
     id: 3,
     name: "Selfie :-)",
     price: 4.0,
-    images: ["/images/selfie.JPG", "/images/pend1.JPG"],
+    images: ["/images/selfie.JPG"],
     description: `Introducing our stunning 0.2mm thick aluminium cards, perfect for showcasing your cherished memories! These lightweight yet durable cards are designed for engraving high-quality images, allowing you to immortalise your favourite moments in style.
 Each card features a sleek surface ideal for detailed engraving, making it easy to customise with your chosen pictures. Once engraved, you can display your cards in a stylish frame or simply place them on a shelf, creating a unique and personal touch to any space.
 Whether you’re looking to celebrate special occasions, commemorate milestones, or simply decorate your home, these aluminium cards offer a modern and elegant way to display your memories. Their minimalist design complements any decor, making them perfect gifts for loved ones or a delightful addition to your own collection.
