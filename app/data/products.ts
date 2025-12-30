@@ -18,7 +18,7 @@ export const products: Product[] = [
     id: 1,
     name: "Engraved Aluminium Business Card (Ask for Bulk Orders)",
     price: 3.00,
-    images: ["/images/businessCard.JPG", "/images/buss.JPG"],
+    images: ["/images/buss.JPG"],
     description: `Introducing our exquisite 0.2mm aluminium business cards, the perfect blend of durability and elegance! Crafted from high-quality aluminium, these cards are not only lightweight but also incredibly strong, making them a lasting impression in the world of networking.
 Each card is precision-engraved with your unique design, ensuring that your brand stands out with a modern and professional aesthetic. The sleek metallic finish adds a touch of sophistication, while the matte or brushed options give a contemporary feel that’s sure to catch the eye.
 Ideal for entrepreneurs, creatives, and professionals alike, these business cards are perfect for making a memorable statement at meetings, conferences, or networking events. With their resistance to wear and tear, they’ll maintain their pristine appearance, representing your brand effectively over time.
@@ -63,15 +63,15 @@ Features:
 Elevate your accessory game while ensuring your peace of mind. Order yours today!`,
     favorites: 0,
   },
-  {
-    id: 5,
-    name: "Personalised knives (not in stock, order yours today)",
-    price: 30.00,
-    images: ["/images/kit1.JPG", "/images/kit2.JPG"],
-    description:
-      "Elegant, engraved and ready to gift, these knives are the perfect personalized present for anyone who loves to cook. The fine engraving on the blade adds a unique, custom touch, transforming a practical tool into a meaningful keepsake that can be cherished and used every day.",
-    favorites: 0,
-  },
+  //{
+  // id: 5,
+  // name: "Personalised knives (not in stock, order yours today)",
+  //price: 30.00,
+  //images: ["/images/kit1.JPG", "/images/kit2.JPG"],
+  //description:
+  //  "Elegant, engraved and ready to gift, these knives are the perfect personalized present for anyone who loves to cook. The fine engraving on the blade adds a unique, custom touch, transforming a practical tool into a meaningful keepsake that can be cherished and used every day.",
+  //favorites: 0,
+  //},
   {
     id: 6,
     name: "Customised Pandative (low stock)",
@@ -90,7 +90,7 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
        • Friends and family who adore their cats
        • Pet parents who want a keepsake to remind them of their furry friend
        • Anyone who loves minimalist, meaningful jewelry
-       
+
        Add a touch of feline charm to your daily look or surprise a cat lover with a special, custom-engraved pendant they’ll treasure.
      You can customize this pendant – contact me if you’d like a different cat design, name, or a special message added!
      Celebrate your love for cats with this elegant laser-engraved aluminum pendant. 
