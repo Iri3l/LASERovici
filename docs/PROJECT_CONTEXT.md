@@ -14,15 +14,15 @@ This document provides essential context about the project for future developmen
 - **Language**: TypeScript 5.9.2
 - **Styling**: TailwindCSS 3.4.17
 - **React**: 18.2.0
-- **Payment**: Stripe (Apple Pay, Google Pay, Cards) & PayPal
+- **Payment**: PayPal (Apple Pay, Google Pay, Cards, PayPal Account)
 - **Build**: Static export (`output: 'export'` in next.config.js)
 - **Node Version**: 22.x (for IONOS builds)
 
 ## 📁 Key Project Structure
 ```
 /app
-  /api/create-payment-intent - Server-side Stripe payment intent creation
-  /components      - React components (Header, CheckoutForm, etc.)
+  /api/create-payment-intent - Stripe payment intent API route (legacy, not used)
+  /components      - React components (Header, CheckoutPayPal, etc.)
   /data
     products.ts    - Product catalog (array of Product objects)
   /context

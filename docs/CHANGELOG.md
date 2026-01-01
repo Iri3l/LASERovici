@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.1.1] - PayPal Payment Integration Fix (2026-01-01)
+### Fixed
+- **Payment Gateway Compatibility**: Replaced Stripe with PayPal for static export compatibility
+  - Stripe requires API routes which don't work with static export (`output: 'export'`)
+  - PayPal works perfectly in static export without server-side requirements
+- **Build Errors**: Fixed Stripe API route initialization errors in GitHub Actions builds
+  - API route now gracefully handles missing environment variables
+  - Build succeeds without Stripe keys configured
+
+### Changed
+- **Checkout Implementation**: Switched from Stripe Elements to PayPal Buttons in `BasketClient.tsx`
+  - Removed Stripe dependencies (`@stripe/react-stripe-js`, `Elements`, `CheckoutForm`)
+  - Integrated existing `CheckoutPayPal` component
+  - Simplified payment flow (PayPal handles T&C via modal)
+- **Payment Methods**: PayPal automatically provides:
+  - **Apple Pay** (on iOS/Mac devices)
+  - **Google Pay** (on Android devices)
+  - Credit/debit cards
+  - PayPal account payments
+
+### Technical Details
+- PayPal SDK already configured in `app/components/Providers.tsx`
+- `CheckoutPayPal` component handles Terms & Conditions via modal
+- No API routes required - fully client-side compatible with static export
+- Stripe API route (`/api/create-payment-intent`) remains in codebase but is unused
+  - Can be removed if not needed, or kept for future server-side rendering migration
+
+---
+
 ## [v2.1.0] - Stripe Payment Gateway Integration (2026-01-01)
 ### Added
 - **Stripe Payment Gateway**: Integrated Stripe to handle payments, providing access to multiple payment methods.

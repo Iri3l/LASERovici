@@ -4,40 +4,15 @@
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { useCart } from "../context/CartContext"
-import CheckoutForm from "../components/CheckoutForm"
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe, Appearance } from '@stripe/stripe-js';
-
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+import CheckoutPayPal from "../components/CheckoutPayPal"
 
 export default function BasketClient() {
   const { cart, addToCart, removeFromCart, removeItem, clearCart } = useCart()
-  const [clientSecret, setClientSecret] = useState("");
   const [mounted, setMounted] = useState(false)
-  const [tcAccepted, setTcAccepted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    if (cart.length > 0) {
-      // Create PaymentIntent as soon as the page loads with a cart
-      fetch("/api/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cartItems: cart }),
-      })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
-    }
-  }, [cart]);
-
-  const appearance: Appearance = {
-    theme: 'stripe',
-  };
-
-  const options = {
-    clientSecret,
-    appearance,
-  };
+  }, []);
 
 
   // Totals
@@ -162,48 +137,10 @@ export default function BasketClient() {
                 </div>
               </div>
 
-              {/* T&C inline gate */}
+              {/* Payment Methods */}
               {mounted && cart.length > 0 && (
-                <div className="mt-5 space-y-3">
-                  <label className="flex items-start gap-2">
-                    <input
-                      type="checkbox"
-                      className="mt-1 h-4 w-4"
-                      checked={tcAccepted}
-                      onChange={(e) => setTcAccepted(e.currentTarget.checked)}
-                    />
-                    <span className="text-sm text-white/90">
-                      I have read and accept the{" "}
-                      <Link href="/terms" target="_blank" className="underline underline-offset-4">
-                        Terms &amp; Conditions
-                      </Link>{" "}
-                      and{" "}
-                      <Link href="/privacy" target="_blank" className="underline underline-offset-4">
-                        Privacy Policy
-                      </Link>
-                      .
-                    </span>
-                  </label>
-
-                  {/* Payment Methods */}
-                  <div className="relative">
-                    {!tcAccepted && (
-                      <div
-                        className="absolute inset-0 z-10 rounded-lg bg-black/20 backdrop-blur-sm flex items-center justify-center pointer-events-auto"
-                        aria-hidden="true"
-                      >
-                        <span className="text-xs text-white/90 bg-black/40 px-2 py-1 rounded">
-                          Please accept Terms &amp; Conditions to continue
-                        </span>
-                      </div>
-                    )}
-                    {/* Render CheckoutForm */}
-                    {tcAccepted && clientSecret && (
-                      <Elements options={options} stripe={stripePromise}>
-                        <CheckoutForm />
-                      </Elements>
-                    )}
-                  </div>
+                <div className="mt-5">
+                  <CheckoutPayPal />
                 </div>
               )}
 

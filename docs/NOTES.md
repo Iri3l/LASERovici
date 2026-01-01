@@ -19,10 +19,11 @@
 ⚠️ Note: On macOS desktop you usually won’t see the install button; that’s expected.
 
 ## ✅ Current Working State (2026-01-01)
-- **Stripe Payment Gateway**:
-  - Securely handles payments via Stripe Elements.
-  - Dynamically shows Apple Pay, Google Pay, and card options.
-  - Server-side payment intent creation for enhanced security.
+- **PayPal Payment Gateway**:
+  - Fully compatible with static export (no API routes required).
+  - Automatically provides Apple Pay, Google Pay, and card payment options.
+  - Client-side payment processing via PayPal SDK.
+  - Terms & Conditions handled via PayPal modal.
 - **Admin Panel** (`/admin`)
   - Secure login with password protection
   - Full product management (add, edit, delete)
@@ -61,12 +62,16 @@
 - Brand typography pass
 
 ## 🧩 Implementation Notes
-- **Stripe Payments**:
-  - Uses `stripe` and `@stripe/react-stripe-js`.
-  - `BasketClient.tsx` fetches a `clientSecret` from `/api/create-payment-intent`.
-  - The `Elements` provider is initialized in `BasketClient.tsx` with the `clientSecret`.
-  - `CheckoutForm.tsx` contains the `<PaymentElement>` and handles submission.
-  - Keys are stored in `.env.local`: `STRIPE_SECRET_KEY` (server-side only) and `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`.
+- **PayPal Payments**:
+  - Uses `@paypal/react-paypal-js` package.
+  - `PayPalScriptProvider` configured in `app/components/Providers.tsx`.
+  - `CheckoutPayPal` component handles payment flow with Terms & Conditions modal.
+  - Automatically detects and shows Apple Pay/Google Pay on supported devices.
+  - Fully client-side - no API routes required (perfect for static export).
+- **Stripe (Legacy - Not Active)**:
+  - Stripe integration exists but is not used (incompatible with static export).
+  - API route `/api/create-payment-intent` exists but not called.
+  - Can be removed or kept for future server-side rendering migration.
 - **Admin Panel**:
   - Authentication: SHA-256 hashed password verification (client-side)
   - Product storage: `localStorage` key `laserovici_products_v1`
