@@ -39,6 +39,14 @@ jobs:
         with:
           node-version: v22.x
 
+      - name: Debug: Print Env Vars
+        env:
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+        run: |
+          echo "STRIPE_SECRET_KEY is set: ${{ env.STRIPE_SECRET_KEY != '' }}"
+          echo "First 8 chars of publishable key: ${{ env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}"
+
       - name: Build Node assets
         env:
           CI: true
