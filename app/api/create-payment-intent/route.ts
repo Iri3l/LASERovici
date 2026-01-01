@@ -33,9 +33,9 @@ export async function POST(req: Request) {
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
-      currency: 'ron', // Assuming RON currency. Adjust if necessary.
+      currency: 'gbp', // GBP currency for UK shop
       automatic_payment_methods: {
-        enabled: true,
+        enabled: true, // Enables Apple Pay, Google Pay, and card payments
       },
       // You can add more metadata here if needed, e.g., order ID, customer ID
     });

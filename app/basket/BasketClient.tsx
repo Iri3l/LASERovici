@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { useCart } from "../context/CartContext"
 import CheckoutPayPal from "../components/CheckoutPayPal"
+import CheckoutStripe from "../components/CheckoutStripe"
 
 export default function BasketClient() {
   const { cart, addToCart, removeFromCart, removeItem, clearCart } = useCart()
@@ -139,8 +140,18 @@ export default function BasketClient() {
 
               {/* Payment Methods */}
               {mounted && cart.length > 0 && (
-                <div className="mt-5">
-                  <CheckoutPayPal />
+                <div className="mt-5 space-y-4">
+                  {/* Stripe Payment (Apple Pay, Google Pay, Cards) */}
+                  <div>
+                    <p className="text-sm text-white/80 mb-2">Pay with Card, Apple Pay, or Google Pay</p>
+                    <CheckoutStripe />
+                  </div>
+                  
+                  {/* PayPal Payment */}
+                  <div className="pt-4 border-t border-white/20">
+                    <p className="text-sm text-white/80 mb-2">Or pay with PayPal</p>
+                    <CheckoutPayPal />
+                  </div>
                 </div>
               )}
 
