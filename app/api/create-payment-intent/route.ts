@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { CartItem } from '@/app/context/CartContext'; // Adjust path as needed
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20', // Use a recent API version
+  apiVersion: '2025-12-15.clover', // Workaround for build error
 });
 
 export async function POST(req: Request) {
