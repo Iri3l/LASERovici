@@ -23,4 +23,7 @@ jobs:
         run: npm install   # use install (more forgiving than `ci`)
 
       - name: Build (Next static export)
+        env:
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
         run: npm run build
