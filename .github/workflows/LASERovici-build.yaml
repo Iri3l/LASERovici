@@ -12,6 +12,13 @@ on:
       branch-id:
         required: true
         type: string
+    secrets:
+      IONOS_API_KEY:
+        required: true
+      STRIPE_SECRET_KEY:
+        required: true
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
+        required: true
 
 env:
   DEPLOYMENT_FOLDER: out
