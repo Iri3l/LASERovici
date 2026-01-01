@@ -2,12 +2,21 @@ import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
 import { CartItem } from '@/app/context/CartContext'; // Adjust path as needed
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-12-15.clover', // Workaround for build error
-});
+// Initialize Stripe only if key exists (allows build to succeed without key)
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+const stripe = stripeKey ? new Stripe(stripeKey, {
+  apiVersion: '2025-12-15.clover',
+}) : null;
 
 export async function POST(req: Request) {
   try {
+    if (!stripe) {
+      return new NextResponse(
+        JSON.stringify({ error: 'Stripe is not configured. API routes are not available in static export mode.' }),
+        { status: 503 }
+      );
+    }
+
     const { cartItems }: { cartItems: CartItem[] } = await req.json();
 
     // Calculate the total amount on the server to prevent client-side manipulation
