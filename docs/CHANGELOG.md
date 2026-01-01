@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v2.1.0] - Stripe Payment Gateway Integration (2026-01-01)
+### Added
+- **Stripe Payment Gateway**: Integrated Stripe to handle payments, providing access to multiple payment methods.
+- **Dynamic Payment Methods**: The new checkout form dynamically shows available payment methods, including Apple Pay, Google Pay, and credit/debit cards, based on the user's device and browser.
+- **Server-Side Payment Intent**: Created a new API route (`/api/create-payment-intent`) to securely create payment intents on the server. This improves security by preventing client-side price manipulation.
+- **Stripe Dependencies**: Added `@stripe/stripe-js`, `@stripe/react-stripe-js`, and `stripe` packages.
+
+### Changed
+- **Checkout Flow**: Replaced the previous client-side-only PayPal implementation in the basket with a unified checkout form powered by Stripe Elements.
+- **Architecture**: Refactored the payment process to be more secure and scalable. The front-end now fetches a `clientSecret` from the server to initialize the payment flow.
+
+### Security
+- **Enhanced Security**: Moved payment amount calculation to the server-side, mitigating risks of client-side data tampering.
+- **Environment Variables**: Securely configured Stripe keys using `.env.local`, which is excluded from version control.
+
+---
+
 ## [v2.0.1] – JSON Export/Import for Template Users (2025‑12‑21)
 ### Added
 - **JSON Export/Import System** - Makes template suitable for non-coders:

@@ -10,7 +10,6 @@ Items here are **not yet planned**, but may move into NOTES.md when prioritized.
 - **Enhanced product descriptions** with storytelling for SEO.  
 - **Gift packaging option** at checkout.  
 - **Customer subscription form** → connect directly with Mailchimp/Brevo for automated campaigns.  
-- **Apple Pay & Google Pay** → expand payment flexibility beyond PayPal.  
 
 ---
 

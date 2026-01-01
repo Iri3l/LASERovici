@@ -1,21 +1,44 @@
-// app/basket/BasketClient.tsx (CLIENT)
 "use client"
 /* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { useCart } from "../context/CartContext"
-import { PayPalButtons } from "@paypal/react-paypal-js"
+import CheckoutForm from "../components/CheckoutForm"
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe, Appearance } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export default function BasketClient() {
   const { cart, addToCart, removeFromCart, removeItem, clearCart } = useCart()
-
-  // Hydration-safe rendering
+  const [clientSecret, setClientSecret] = useState("");
   const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-
-  // T&C checkbox: starts UNCHECKED every time (no persistence)
   const [tcAccepted, setTcAccepted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    if (cart.length > 0) {
+      // Create PaymentIntent as soon as the page loads with a cart
+      fetch("/api/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cartItems: cart }),
+      })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
+    }
+  }, [cart]);
+
+  const appearance: Appearance = {
+    theme: 'stripe',
+  };
+
+  const options = {
+    clientSecret,
+    appearance,
+  };
+
 
   // Totals
   const subtotal = useMemo(
@@ -162,7 +185,7 @@ export default function BasketClient() {
                     </span>
                   </label>
 
-                  {/* PayPal buttons; blocked by overlay until T&C checked */}
+                  {/* Payment Methods */}
                   <div className="relative">
                     {!tcAccepted && (
                       <div
@@ -174,54 +197,12 @@ export default function BasketClient() {
                         </span>
                       </div>
                     )}
-
-                    <div className={!tcAccepted ? "pointer-events-none select-none opacity-70" : ""}>
-                      <PayPalButtons
-                        style={{
-                          layout: "horizontal",
-                          color: "gold",
-                          label: "checkout",
-                          shape: "rect",
-                          height: 45,
-                          tagline: false,
-                        }}
-                        onClick={(_data, actions) => {
-                          if (!tcAccepted) return actions.reject()
-                          return actions.resolve()
-                        }}
-                        createOrder={(_data, actions) =>
-                          actions.order.create({
-                            intent: "CAPTURE",
-                            purchase_units: [
-                              {
-                                amount: {
-                                  currency_code: "GBP",
-                                  value: subtotal.toFixed(2),
-                                },
-                              },
-                            ],
-                            application_context: {
-                              shipping_preference: "GET_FROM_FILE",
-                            },
-                          })
-                        }
-                        onApprove={async (_data, actions) => {
-                          if (!actions.order) return
-                          const details = await actions.order.capture()
-                          alert(
-                            `Transaction completed by ${
-                              details.payer?.name?.given_name || "customer"
-                            }`
-                          )
-                          clearCart()
-                        }}
-                        onError={(err) => {
-                          console.error("PayPal error:", err)
-                          alert("Sorry, PayPal checkout failed. Please try again.")
-                        }}
-                        forceReRender={[subtotal.toFixed(2), String(totalItems), String(tcAccepted)]}
-                      />
-                    </div>
+                    {/* Render CheckoutForm */}
+                    {tcAccepted && clientSecret && (
+                      <Elements options={options} stripe={stripePromise}>
+                        <CheckoutForm />
+                      </Elements>
+                    )}
                   </div>
                 </div>
               )}

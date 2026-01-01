@@ -18,7 +18,11 @@
 
 ⚠️ Note: On macOS desktop you usually won’t see the install button; that’s expected.
 
-## ✅ Current Working State (2025‑12‑21)
+## ✅ Current Working State (2026-01-01)
+- **Stripe Payment Gateway**:
+  - Securely handles payments via Stripe Elements.
+  - Dynamically shows Apple Pay, Google Pay, and card options.
+  - Server-side payment intent creation for enhanced security.
 - **Admin Panel** (`/admin`)
   - Secure login with password protection
   - Full product management (add, edit, delete)
@@ -37,27 +41,14 @@
   - Lightbox with arrows + zoom for each product gallery.
   - Long descriptions collapse with **See more / See less**.
 - **Basket / Checkout**
-  - Quantity: `+`/`−` adjust by 1; **Remove** clears the line.
-  - **T&C checkbox** required before PayPal (inline gate); links to Terms & Privacy work.
+  - **T&C checkbox** required before payment (inline gate).
   - Cart **persists across refresh** (localStorage) and syncs across tabs.
 - **SEO / Misc**
   - Structured data (Organization, Website).
   - Static export for IONOS works with `images.unoptimized: true`.
 
-## Previous Working State (2025‑08‑24)
-- **Header**
-  - Fixed on mobile, sticky on desktop; gradient preserved.
-  - Cart icon + live badge always visible; safe‑area padding enabled for iOS.
-- **Products**
-  - Lightbox with arrows + zoom for each product gallery.
-  - Long descriptions collapse with **See more / See less**.
-- **Basket / Checkout**
-  - Quantity: `+`/`−` adjust by 1; **Remove** clears the line.
-  - **T&C checkbox** required before PayPal (inline gate); links to Terms & Privacy work.
-  - Cart **persists across refresh** (localStorage) and syncs across tabs.
-- **SEO / Misc**
-  - Structured data (Organization, Website).
-  - Static export for IONOS works with `images.unoptimized: true`.
+## ✅ Recently Completed
+- Apple Pay / Google Pay via Stripe
 
 ## 🚦 Next Planned (short‑list)
 - Direct file upload to repository via GitHub API (for admin panel)
@@ -65,12 +56,17 @@
 - Image optimization and automatic resizing in admin panel
 - Bulk product operations
 - Product categories/tags management
-- Apple Pay / Google Pay via Stripe
 - Newsletter signup (Mailchimp/Resend + double opt‑in)
 - Mobile header micro‑copy (free shipping threshold, optional)
 - Brand typography pass
 
 ## 🧩 Implementation Notes
+- **Stripe Payments**:
+  - Uses `stripe` and `@stripe/react-stripe-js`.
+  - `BasketClient.tsx` fetches a `clientSecret` from `/api/create-payment-intent`.
+  - The `Elements` provider is initialized in `BasketClient.tsx` with the `clientSecret`.
+  - `CheckoutForm.tsx` contains the `<PaymentElement>` and handles submission.
+  - Keys are stored in `.env.local`: `STRIPE_SECRET_KEY` (server-side only) and `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`.
 - **Admin Panel**:
   - Authentication: SHA-256 hashed password verification (client-side)
   - Product storage: `localStorage` key `laserovici_products_v1`

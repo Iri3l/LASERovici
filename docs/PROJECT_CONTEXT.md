@@ -14,14 +14,15 @@ This document provides essential context about the project for future developmen
 - **Language**: TypeScript 5.9.2
 - **Styling**: TailwindCSS 3.4.17
 - **React**: 18.2.0
-- **Payment**: PayPal Checkout (@paypal/react-paypal-js)
+- **Payment**: Stripe (Apple Pay, Google Pay, Cards) & PayPal
 - **Build**: Static export (`output: 'export'` in next.config.js)
 - **Node Version**: 22.x (for IONOS builds)
 
 ## 📁 Key Project Structure
 ```
 /app
-  /components      - React components (Header, HomeClient, ProductCarousel, etc.)
+  /api/create-payment-intent - Server-side Stripe payment intent creation
+  /components      - React components (Header, CheckoutForm, etc.)
   /data
     products.ts    - Product catalog (array of Product objects)
   /context
@@ -116,12 +117,10 @@ This document provides essential context about the project for future developmen
 - **Remote**: `origin` → `https://github.com/Iri3l/LASERovici.git`
 - **Deployment**: Auto-deploys on push to `docs-foundation` branch
 
-## 📝 Recent Changes (2025-12-21)
-- Fixed IONOS deployment (changed folder from `public` to `out`)
-- Added `.htaccess` for Apache configuration
-- Fixed image extensions (`.jpg` → `.JPG`) for products 1-3
-- Added product template in `products.ts`
-- Updated CHANGELOG.md with v1.3 entry
+## 📝 Recent Changes (2026-01-01)
+- Integrated Stripe payment gateway.
+- Added support for Apple Pay, Google Pay, and card payments.
+- Refactored checkout to use a secure, server-side payment flow.
 
 ## 🚀 Development Commands
 ```bash
@@ -141,11 +140,11 @@ npm run lint     # Run ESLint
 ## 💡 Key Features
 - PWA support (installable app)
 - Shopping cart with localStorage persistence
-- PayPal checkout integration
+- Stripe & PayPal checkout integration (Apple Pay, Google Pay, Cards)
 - Lightbox gallery for product images
 - Responsive design (mobile-first)
 - SEO optimized (metadata, Open Graph, structured data)
 
 ---
-*Last updated: 2025-12-21*
+*Last updated: 2026-01-01*
 
