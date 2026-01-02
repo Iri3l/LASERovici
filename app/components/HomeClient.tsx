@@ -7,7 +7,6 @@ import { useState, useEffect } from "react"
 import Hero from "../components/Hero"
 import { products as defaultProducts, Product } from "../data/products"
 import { useCart } from "../context/CartContext"
-import { getProducts, loadProductsFromJSON } from "../utils/productsStorage"
 
 // Lightbox (regular imports — plugins aren’t React components)
 import Lightbox from "yet-another-react-lightbox"
@@ -143,40 +142,10 @@ export default function HomeClient() {
   const { addToCart } = useCart()
   const [products, setProducts] = useState<Product[]>(defaultProducts)
 
-  // Load products priority: products.ts (ALWAYS for developers) → JSON file (optional for template users)
-  // For developers: products.ts changes are ALWAYS used (push/commit works immediately)
-  // For template users: can optionally use JSON file by placing it in /public/data/products.json
+  // Products are loaded from products.ts (source of truth)
+  // All product changes must be made in app/data/products.ts and committed
   useEffect(() => {
-    const loadProducts = async () => {
-      // Start with products.ts (your code changes) - this is the source of truth
-      let finalProducts = defaultProducts;
-
-      // Check for JSON file override (ONLY for template users who don't code)
-      // JSON file is optional and only used if it exists
-      try {
-        const jsonProducts = await loadProductsFromJSON();
-        if (jsonProducts && jsonProducts.length > 0) {
-          // JSON file exists - use it (template mode for non-coders)
-          // This allows template users to manage products without coding
-          finalProducts = jsonProducts;
-          console.log('📦 Using products from /data/products.json (template mode)');
-        } else {
-          // No JSON file - use products.ts (development mode - your code)
-          console.log('💻 Using products from products.ts (development mode)');
-        }
-      } catch (error) {
-        // JSON file doesn't exist or error - use products.ts
-        console.log('💻 Using products from products.ts (default)');
-      }
-
-      // localStorage is ONLY for admin panel preview (temporary, not persisted)
-      // We don't use localStorage in production - it's just for testing in admin panel
-      // If you want to use localStorage changes, export to JSON first
-
-      setProducts(finalProducts);
-    };
-
-    loadProducts();
+    setProducts(defaultProducts);
   }, []);
 
   // JSON-LD (Organization + WebSite)

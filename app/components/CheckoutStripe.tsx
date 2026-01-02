@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Elements } from "@stripe/react-stripe-js"
-import { stripePromise } from "./Providers"
+import { getStripePromise } from "./Providers"
 import CheckoutForm from "./CheckoutForm"
 import { useCart } from "../context/CartContext"
 
@@ -11,6 +11,13 @@ export default function CheckoutStripe() {
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [stripePromise, setStripePromise] = useState<ReturnType<typeof getStripePromise> | null>(null)
+
+  useEffect(() => {
+    // Initialize Stripe promise on client-side
+    const promise = getStripePromise()
+    setStripePromise(promise)
+  }, [])
 
   useEffect(() => {
     // Only fetch client secret if Stripe is configured and we have items in cart
@@ -40,7 +47,7 @@ export default function CheckoutStripe() {
         setError(err.message || "Failed to initialize payment")
         setLoading(false)
       })
-  }, [cart])
+  }, [cart, stripePromise])
 
   // Don't render if Stripe is not configured
   if (!stripePromise) {
