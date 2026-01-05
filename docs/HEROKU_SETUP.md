@@ -151,3 +151,4 @@ After deployment:
 3. Set up Stripe webhooks (optional, for order notifications)
 4. Switch to live Stripe keys when ready for production
 
+

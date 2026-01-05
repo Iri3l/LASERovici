@@ -5,7 +5,7 @@ import { Mail, ShieldCheck, PackageCheck, Clock } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="mt-16 border-t border-white/10 bg-gradient-to-r from-violet-700/80 via-fuchsia-700/80 to-cyan-700/80 text-white">
+    <footer className="mt-16 border-t border-white/10 bg-gradient-to-r from-black/80 via-yellow-800/80 to-orange-800/80 text-white">
       {/* Top: Value props */}
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="flex items-start gap-3">
@@ -97,7 +97,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className="rounded-lg bg-white text-cyan-600 font-semibold px-4 py-2 hover:bg-cyan-50 transition"
+                className="rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-semibold px-4 py-2 hover:from-yellow-600 hover:to-orange-600 transition"
               >
                 Join
               </button>

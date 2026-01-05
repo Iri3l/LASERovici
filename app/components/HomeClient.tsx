@@ -67,7 +67,7 @@ function ProductCard({
               onDoubleClick={() => openLightboxAt(img)} // double‑click thumb to open zoomed
               className={`w-10 h-10 rounded overflow-hidden border-2 ${
                 selectedImage === img
-                  ? "border-cyan-600"
+                  ? "border-yellow-500"
                   : "border-transparent hover:border-gray-300"
               }`}
               aria-label={`View ${product.name} image ${i + 1}`}
@@ -94,7 +94,7 @@ function ProductCard({
         {fullDesc.length > PREVIEW_LEN && (
           <button
             onClick={() => setExpanded((v) => !v)}
-            className="text-cyan-600 text-sm mt-1 self-start hover:underline"
+            className="text-yellow-600 text-sm mt-1 self-start hover:underline"
             aria-expanded={expanded}
             aria-controls={`desc-${product.id}`}
           >
@@ -102,7 +102,7 @@ function ProductCard({
           </button>
         )}
 
-        <p className="mt-2 text-lg font-bold text-fuchsia-600">
+        <p className="mt-2 text-lg font-bold text-orange-600">
           £{product.price.toFixed(2)}
         </p>
 
@@ -115,7 +115,7 @@ function ProductCard({
               image: product.images[0] ?? "/images/placeholder.jpg",
             })
           }
-          className="mt-4 bg-gradient-to-r from-cyan-500 to-fuchsia-500 hover:from-cyan-600 hover:to-fuchsia-600 text-white px-4 py-2 rounded-lg w-full font-semibold shadow-lg transition-all"
+          className="mt-4 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black px-4 py-2 rounded-lg w-full font-semibold shadow-lg transition-all"
         >
           Add to Basket
         </button>
@@ -158,7 +158,7 @@ export default function HomeClient() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-gray-900">
+    <main className="min-h-screen bg-gradient-to-r from-black via-yellow-600 to-orange-600 text-gray-900">
       {/* Structured data */}
       <Script
         id="ld-org-website"

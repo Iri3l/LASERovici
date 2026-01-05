@@ -38,7 +38,7 @@ export default function Header() {
     <header className="
     fixed md:sticky top-0 inset-x-0 z-50
     border-b border-white/10
-    bg-gradient-to-r from-violet-900/90 via-fuchsia-900/90 to-cyan-900/90
+    bg-gradient-to-r from-black/90 via-yellow-900/90 to-orange-900/90
     backdrop-blur-md shadow-lg
     pt-[env(safe-area-inset-top)]
   "
@@ -66,7 +66,7 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-6">
             <Link
               href="/"
-              className="text-white/95 hover:text-amber-300 transition-colors text-sm font-medium"
+              className="text-white/95 hover:text-yellow-400 transition-colors text-sm font-medium"
             >
               Home
             </Link>
@@ -74,7 +74,7 @@ export default function Header() {
             {/* Desktop: Basket link with badge */}
             <Link
               href="/basket"
-              className="relative flex items-center gap-2 text-white/95 hover:text-amber-300 transition-colors"
+              className="relative flex items-center gap-2 text-white/95 hover:text-yellow-400 transition-colors"
               aria-label={`View basket (${liveCount} ${liveCount === 1 ? "item" : "items"})`}
             >
               <ShoppingCart className="h-6 w-6" />
@@ -98,7 +98,7 @@ export default function Header() {
             {/* Mobile Cart (always visible) */}
             <Link
               href="/basket"
-              className="relative inline-flex items-center justify-center rounded-md p-2 text-white/95 hover:text-amber-300 hover:bg-white/10"
+              className="relative inline-flex items-center justify-center rounded-md p-2 text-white/95 hover:text-yellow-400 hover:bg-white/10"
               aria-label={`Basket (${liveCount} ${liveCount === 1 ? "item" : "items"})`}
             >
               <ShoppingCart className="h-6 w-6" />
@@ -119,7 +119,7 @@ export default function Header() {
             <button
               type="button"
               aria-label="Toggle navigation menu"
-              className="inline-flex items-center justify-center rounded-md p-2 text-white/95 hover:text-amber-300 hover:bg-white/10 focus:outline-none"
+              className="inline-flex items-center justify-center rounded-md p-2 text-white/95 hover:text-yellow-400 hover:bg-white/10 focus:outline-none"
               onClick={toggleMobile}
             >
               {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -134,7 +134,7 @@ export default function Header() {
           mobileOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <nav className="px-4 sm:px-6 pb-4 space-y-2 bg-gradient-to-r from-[#0B1530] via-[#152553] to-[#1D3A8A]">
+        <nav className="px-4 sm:px-6 pb-4 space-y-2 bg-gradient-to-r from-black via-yellow-900 to-orange-900">
           <Link
             href="/"
             className="block rounded-lg px-4 py-3 bg-white/10 text-white/95 hover:bg-white/15"
