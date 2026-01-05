@@ -27,13 +27,13 @@ export default function BasketClient() {
   )
 
   return (
-    <main className="min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white">
+    <main className="min-h-screen bg-gradient-to-r from-emerald-500 via-cyan-500 to-violet-500 text-white">
       <div className="max-w-7xl mx-auto px-6 py-10">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-extrabold">Your Basket</h1>
           <Link
             href="/"
-            className="text-sm px-4 py-2 rounded-lg bg-white/90 text-blue-700 hover:bg-white transition"
+            className="text-sm px-4 py-2 rounded-lg bg-white/90 text-emerald-700 hover:bg-white transition"
           >
             Continue Shopping
           </Link>

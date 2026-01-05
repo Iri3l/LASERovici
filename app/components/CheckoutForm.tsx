@@ -87,7 +87,7 @@ export default function CheckoutForm() {
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       {stripe && elements && <PaymentElement id="payment-element" options={paymentElementOptions} />}
-      <button disabled={isLoading || !stripe || !elements} id="submit" className="mt-4 w-full bg-blue-500 text-white p-2 rounded">
+      <button disabled={isLoading || !stripe || !elements} id="submit" className="mt-4 w-full bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white p-2 rounded font-semibold hover:from-cyan-600 hover:to-fuchsia-600 transition-all">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>

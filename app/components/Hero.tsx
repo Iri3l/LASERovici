@@ -1,7 +1,7 @@
 // app/components/Hero.tsx
 export default function Hero() {
   return (
-    <section className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white">
+    <section className="bg-gradient-to-r from-cyan-500 via-fuchsia-500 to-orange-500 text-white">
       <div className="max-w-7xl mx-auto px-6 py-20 text-center">
         {/* Headline */}
         <h1 className="text-4xl md:text-5xl font-extrabold">
@@ -30,13 +30,13 @@ export default function Hero() {
         <div className="mt-8 flex items-center justify-center gap-3">
           <a
             href="#products"
-            className="inline-flex items-center justify-center rounded-lg bg-white text-blue-700 font-semibold px-5 py-3 shadow hover:bg-blue-50 transition"
+            className="inline-flex items-center justify-center rounded-lg bg-white text-cyan-600 font-semibold px-5 py-3 shadow hover:bg-cyan-50 transition"
           >
             Browse Products
           </a>
           <a
             href="/basket"
-            className="inline-flex items-center justify-center rounded-lg bg-blue-700/20 text-white border border-white/30 px-5 py-3 hover:bg-blue-700/30 transition"
+            className="inline-flex items-center justify-center rounded-lg bg-fuchsia-500/20 text-white border border-white/30 px-5 py-3 hover:bg-fuchsia-500/30 transition"
           >
             View Basket
           </a>

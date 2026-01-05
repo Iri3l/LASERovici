@@ -132,7 +132,7 @@ export default function ProductCarousel({ images, alt = "Product image", classNa
             onClick={() => goTo(i)}
             aria-label={`Go to image ${i + 1}`}
             className={`h-2.5 rounded-full transition-all ${
-              i === index ? "w-6 bg-blue-600" : "w-2.5 bg-gray-300 hover:bg-gray-400"
+              i === index ? "w-6 bg-cyan-600" : "w-2.5 bg-gray-300 hover:bg-gray-400"
             }`}
           />
         ))}
@@ -146,7 +146,7 @@ export default function ProductCarousel({ images, alt = "Product image", classNa
               key={src + i}
               onClick={() => goTo(i)}
               className={`shrink-0 rounded-md border-2 ${
-                i === index ? "border-blue-600" : "border-transparent"
+                i === index ? "border-cyan-600" : "border-transparent"
               }`}
               aria-label={`Select image ${i + 1}`}
               style={{ lineHeight: 0 }}

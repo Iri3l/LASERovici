@@ -73,11 +73,11 @@ export default function TermsConsentModal({
           <div className="prose prose-sm max-w-none text-gray-800">
             <p>
               By proceeding, you agree to our{" "}
-              <Link href="/terms" target="_blank" className="text-blue-600 underline underline-offset-4">
+              <Link href="/terms" target="_blank" className="text-cyan-600 underline underline-offset-4">
                 Terms &amp; Conditions
               </Link>{" "}
               and acknowledge our{" "}
-              <Link href="/privacy" target="_blank" className="text-blue-600 underline underline-offset-4">
+              <Link href="/privacy" target="_blank" className="text-cyan-600 underline underline-offset-4">
                 Privacy Policy
               </Link>
               .
@@ -117,7 +117,7 @@ export default function TermsConsentModal({
               onAccept();    // parent will persist + continue
               onClose();
             }}
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-fuchsia-500 text-white hover:from-cyan-600 hover:to-fuchsia-600 disabled:opacity-50 disabled:cursor-not-allowed font-semibold transition-all"
           >
             Accept & Continue
           </button>

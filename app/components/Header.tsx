@@ -38,7 +38,7 @@ export default function Header() {
     <header className="
     fixed md:sticky top-0 inset-x-0 z-50
     border-b border-white/10
-    bg-gradient-to-r from-[#0B1530]/90 via-[#152553]/90 to-[#1D3A8A]/90
+    bg-gradient-to-r from-violet-900/90 via-fuchsia-900/90 to-cyan-900/90
     backdrop-blur-md shadow-lg
     pt-[env(safe-area-inset-top)]
   "
