@@ -111,7 +111,10 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
 
 🏔️ The Design: I can engrave outdoor themes (like in the photo), OR any custom text/name you want.
 ✨ Personalized: Add a name, a date, or a coordinate on the back!
-Perfect for car keys, campervans, or hiking backpacks.`,
+Perfect for car keys, campervans, or hiking backpacks. Beautiful real wood keychains with leather strap.
+
+Can be engraved with ANY name, message, or logo you want.
+The laser burn gives a lovely rustic look that doesn't fade.`,
      favorites: 0,
    },
 ];
