@@ -103,7 +103,7 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
      id: 8,
     name: "Wooden keychains ",
      price: 8.0,
-     images: ["/images/woodenkeychain.JPG"],
+     images: ["/images/woodenkeychain.JPG", "/images/key.JPG"],
      description: `Great gift idea for:
        • Someone who loves the outdoors
 
