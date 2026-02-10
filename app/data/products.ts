@@ -100,7 +100,7 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
      favorites: 0,
    },
    {
-     id: 7,
+     id: 8,
     name: "Wooden keychains ",
      price: 8.0,
      images: ["/images/woodenkeychain.jpg"],
