@@ -99,4 +99,19 @@ Elevate your accessory game while ensuring your peace of mind. Order yours today
      The result is a clean, modern look that won’t fade, peel, or wash off.`,
      favorites: 0,
    },
+   {
+     id: 7,
+    name: "Wooden keychains ",
+     price: 8.0,
+     images: ["/images/woodenkeychain.jpg"],
+     description: `Great gift idea for:
+       • Someone who loves the outdoors
+
+       I make these beautiful Walnut Wood & Leather keychains right here in Salford.
+
+🏔️ The Design: I can engrave outdoor themes (like in the photo), OR any custom text/name you want.
+✨ Personalized: Add a name, a date, or a coordinate on the back!
+Perfect for car keys, campervans, or hiking backpacks.`,
+     favorites: 0,
+   },
 ];
